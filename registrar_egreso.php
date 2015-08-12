@@ -114,66 +114,30 @@
 <div class="container" style="margin-top:15px; background-image:url(img/map-image.png);">
   <div class="row">
 
-<div class="col-md-4 col-md-offset-4">
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
-         <h3 class="panel-title">Saldo Actual</h3>
-    </div>
-    <div class="panel-body">
-        <div class="media-body">
-             <h3 class="media-heading"><?php echo $monto_total; ?></h3>
-        </div>
-    </div>
-</div>
-
-</div>
-
       <div class="col-md-4 col-md-offset-4">
           <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Registrar Aporte</h3>
+                <h3 class="panel-title">Registrar Egreso</h3>
             </div>
               <div class="panel-body">
                 <form accept-charset="UTF-8" name="formIngreso" id="formIngreso" role="form" method="post" action="newAporte.php">
                       <fieldset>
+                      <div class="form-group"></div>
+                      <div class="form-group"></div>
+                      <div class="form-group"></div>
                       <div class="form-group">
-						  <select name="gestion" id="gestion" class="form-control">
-                              <option value="">--Seleccionar Gestion--</option>
-                              <?php
-                              	while($dato = $db->query_Fetch_Array($sqlGestion))
-                                {
-									echo"<option value=".$dato['pk_gestion'].">".$dato['vch_gestnombreperiocidad']."</option>";
-                                }
-                              ?>
-                          </select>	
+                          <input class="form-control" placeholder="Monto a pagar (BS)" name="monto" id="monto" type="text" required>
                       </div>
                       <div class="form-group">
-                          <select name="usuario" id="usuario" class="form-control">
-                              <option value="">--Seleccionar vecino--</option>
-                              <?php
-                              	while($dato = $db->query_Fetch_Array($sqlUsuario))
-                                {
-									echo"<option value=".$dato['pk_usuario'].">".$dato['vch_usuanombre']." ".$dato["vch_usuaapp"]."</option>";
-                                }
-                              ?>
-                          </select>	
-                      </div>
-                      <div class="form-group">
-                          <select name="actividad" id="actividad" class="form-control">
-                              <option value="">--Seleccionar actividad--</option>
-                              <?php
+                        <select name="actividad" id="actividad" class="form-control">
+                          <option value="">--Seleccionar actividad--</option>
+                          <?php
                               	while($dato = $db->query_Fetch_Array($sqlConcepto))
                                 {
 									echo"<option value=".$dato['pk_concepto'].">".$dato['vch_catenombre']."</option>";
                                 }
                               ?>
-                          </select>	
-                      </div>
-                      <div class="form-group">
-                          <input class="form-control" placeholder="Monto a pagar (BS)" name="monto" id="monto" type="text" required>
-                      </div>
-                      <div class="form-group">
+                        </select>
                         <textarea class="form-control" placeholder="Descripcion" name="descrip" id="descrip" required></textarea>
                       </div>
                     <div class="form-group">

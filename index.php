@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>- GESTEC OTB -</title>
+    <title>.- GESTEC OTB -.</title>
 
     <link rel="icon" href="gotb2.png">
 
@@ -37,9 +37,9 @@
             <div class="collapse navbar-collapse navbar-right">
             	<ul class="nav navbar-nav" id="menu">
                 	<li class="active"><a href="home.php">Home</a></li>
-                     <li><a href="#">Acerca de Nosotros</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="page1.php">Acerca de Nosotros</a></li>
+                    <li><a href="page2.php">Servicios</a></li>
+                    <li><a href="page3.php">Contactos</a></li>
                 </ul>
             </div>
         </div><!--/.container-->
@@ -62,7 +62,7 @@
     	<div class="col-xs-6">
         	<div class="panel panel-primary">
             	<div class="panel-heading">
-                	<h3 class="panel-title">Gestion OTB</h3>
+                	<h3 class="panel-title">Gestion de OTBs</h3>
                 </div>
                 <div class="panel-body">
                 	<div class="pull-left">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="media-body">
                       	<h3 class="media-heading"><a href="#">Control de Vecinos</a></h3>
-                        <p>Manejo de usuarios, gestiona el control de asistencia a reuniones y control de faltas y sanciones</p>
+                        <p>Maneja usuarios, gestiona el control de asistencia a reuniones y control de faltas y sanciones</p>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="media-body">
                        	<h3 class="media-heading"><a href="registrar_ingreso.php">Administracion Contable</a></h3>
-                        <p>Manejo de dinero de la OTB, se encarga del estado financiero tanto como ingresos y egresos, emite reportes para la toma de desiciones</p>
+                        <p>Manejo de dinero de las otbs, se encarga del estado financiero tanto como ingresos y egresos, emite reportes para la toma de desiciones</p>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
 	<div class="container">
     	<div class="row">
         	<div class="col-xs-12">
-            	&copy; 2015 <a target="_self" href="index.php">Equipo Anonimos </a>. @Todos los derechos reservados.
+            	&copy; 2013 <a target="_self" href="index.php">SurfSoftBol srl</a>. Todos los derechos reservados.
             </div>
         </div>
     </div>
