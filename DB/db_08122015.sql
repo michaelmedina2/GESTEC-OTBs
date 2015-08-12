@@ -69,45 +69,6 @@ ALTER SEQUENCE anuncio_pk_anuncio_seq OWNED BY anuncio.pk_anuncio;
 
 
 --
--- Name: aporte; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE aporte (
-    pk_aporte integer NOT NULL,
-    pk_gestion integer,
-    pk_usuario integer,
-    dat_ingrfecha date,
-    int_ingrmonto real,
-    vch_ingrnotadetalle text,
-    vch_ingrconceptoingresoegreso text,
-    vch_ingrtipoestadoie character(1)
-);
-
-
-ALTER TABLE aporte OWNER TO postgres;
-
---
--- Name: aporte_pk_aporte_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE aporte_pk_aporte_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE aporte_pk_aporte_seq OWNER TO postgres;
-
---
--- Name: aporte_pk_aporte_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE aporte_pk_aporte_seq OWNED BY aporte.pk_aporte;
-
-
---
 -- Name: asignado; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -144,23 +105,23 @@ ALTER SEQUENCE asignado_pk_asignado_seq OWNED BY asignado.pk_asignado;
 
 
 --
--- Name: conceptoingresoegreso; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: conceptomovimiento; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE conceptoingresoegreso (
+CREATE TABLE conceptomovimiento (
     pk_concepto integer NOT NULL,
     vch_catenombre text,
     vch_cateestado character(1)
 );
 
 
-ALTER TABLE conceptoingresoegreso OWNER TO postgres;
+ALTER TABLE conceptomovimiento OWNER TO postgres;
 
 --
--- Name: conceptoingresoegreso_pk_concepto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: conceptomovimiento_pk_concepto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE conceptoingresoegreso_pk_concepto_seq
+CREATE SEQUENCE conceptomovimiento_pk_concepto_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -168,13 +129,13 @@ CREATE SEQUENCE conceptoingresoegreso_pk_concepto_seq
     CACHE 1;
 
 
-ALTER TABLE conceptoingresoegreso_pk_concepto_seq OWNER TO postgres;
+ALTER TABLE conceptomovimiento_pk_concepto_seq OWNER TO postgres;
 
 --
--- Name: conceptoingresoegreso_pk_concepto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: conceptomovimiento_pk_concepto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE conceptoingresoegreso_pk_concepto_seq OWNED BY conceptoingresoegreso.pk_concepto;
+ALTER SEQUENCE conceptomovimiento_pk_concepto_seq OWNED BY conceptomovimiento.pk_concepto;
 
 
 --
@@ -296,6 +257,45 @@ ALTER TABLE manzano_pk_manzano_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE manzano_pk_manzano_seq OWNED BY manzano.pk_manzano;
+
+
+--
+-- Name: movimiento; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE movimiento (
+    pk_movimiento integer NOT NULL,
+    pk_gestion integer,
+    pk_usuario integer,
+    dat_movfecha date,
+    int_movmonto real,
+    vch_movnotadetalle text,
+    vch_movconcepto text,
+    vch_movtipoie character(1)
+);
+
+
+ALTER TABLE movimiento OWNER TO postgres;
+
+--
+-- Name: movimiento_pk_movimiento_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE movimiento_pk_movimiento_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE movimiento_pk_movimiento_seq OWNER TO postgres;
+
+--
+-- Name: movimiento_pk_movimiento_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE movimiento_pk_movimiento_seq OWNED BY movimiento.pk_movimiento;
 
 
 --
@@ -481,6 +481,40 @@ ALTER SEQUENCE rol_pk_rol_seq OWNED BY rol.pk_rol;
 
 
 --
+-- Name: total; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE total (
+    pk_total integer NOT NULL,
+    vch_conceptototalmov text,
+    real_montototalmov real
+);
+
+
+ALTER TABLE total OWNER TO postgres;
+
+--
+-- Name: total_pk_total_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE total_pk_total_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE total_pk_total_seq OWNER TO postgres;
+
+--
+-- Name: total_pk_total_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE total_pk_total_seq OWNED BY total.pk_total;
+
+
+--
 -- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -534,13 +568,6 @@ ALTER TABLE ONLY anuncio ALTER COLUMN pk_anuncio SET DEFAULT nextval('anuncio_pk
 
 
 --
--- Name: pk_aporte; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY aporte ALTER COLUMN pk_aporte SET DEFAULT nextval('aporte_pk_aporte_seq'::regclass);
-
-
---
 -- Name: pk_asignado; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -551,7 +578,7 @@ ALTER TABLE ONLY asignado ALTER COLUMN pk_asignado SET DEFAULT nextval('asignado
 -- Name: pk_concepto; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY conceptoingresoegreso ALTER COLUMN pk_concepto SET DEFAULT nextval('conceptoingresoegreso_pk_concepto_seq'::regclass);
+ALTER TABLE ONLY conceptomovimiento ALTER COLUMN pk_concepto SET DEFAULT nextval('conceptomovimiento_pk_concepto_seq'::regclass);
 
 
 --
@@ -573,6 +600,13 @@ ALTER TABLE ONLY gestion ALTER COLUMN pk_gestion SET DEFAULT nextval('gestion_pk
 --
 
 ALTER TABLE ONLY manzano ALTER COLUMN pk_manzano SET DEFAULT nextval('manzano_pk_manzano_seq'::regclass);
+
+
+--
+-- Name: pk_movimiento; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY movimiento ALTER COLUMN pk_movimiento SET DEFAULT nextval('movimiento_pk_movimiento_seq'::regclass);
 
 
 --
@@ -611,6 +645,13 @@ ALTER TABLE ONLY rol ALTER COLUMN pk_rol SET DEFAULT nextval('rol_pk_rol_seq'::r
 
 
 --
+-- Name: pk_total; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY total ALTER COLUMN pk_total SET DEFAULT nextval('total_pk_total_seq'::regclass);
+
+
+--
 -- Name: pk_usuario; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -631,23 +672,6 @@ SELECT pg_catalog.setval('anuncio_pk_anuncio_seq', 1, false);
 
 
 --
--- Data for Name: aporte; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO aporte VALUES (1, 2, 1, '2015-07-29', 100, '                        aporte comunitario', '1', 'I');
-INSERT INTO aporte VALUES (2, 6, 1, '2015-07-28', 50, '                        ', '1', 'I');
-INSERT INTO aporte VALUES (3, 6, 1, '2015-07-28', 50, '                        ', '1', 'I');
-INSERT INTO aporte VALUES (4, 6, 6, '2015-07-28', 1.5, 'prueba del formulario', '1', 'I');
-
-
---
--- Name: aporte_pk_aporte_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('aporte_pk_aporte_seq', 4, true);
-
-
---
 -- Data for Name: asignado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -661,21 +685,21 @@ SELECT pg_catalog.setval('asignado_pk_asignado_seq', 1, false);
 
 
 --
--- Data for Name: conceptoingresoegreso; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: conceptomovimiento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO conceptoingresoegreso VALUES (1, 'Aporte Mensual', 'A');
-INSERT INTO conceptoingresoegreso VALUES (2, 'Multa Desfile', 'A');
-INSERT INTO conceptoingresoegreso VALUES (3, 'Trabajo Comunitario', 'A');
-INSERT INTO conceptoingresoegreso VALUES (4, 'Colaboracion', 'A');
-INSERT INTO conceptoingresoegreso VALUES (5, 'Aniversario', 'A');
+INSERT INTO conceptomovimiento VALUES (1, 'Aporte Mensual', 'A');
+INSERT INTO conceptomovimiento VALUES (2, 'Multa Desfile', 'A');
+INSERT INTO conceptomovimiento VALUES (3, 'Trabajo Comunitario', 'A');
+INSERT INTO conceptomovimiento VALUES (4, 'Colaboracion', 'A');
+INSERT INTO conceptomovimiento VALUES (5, 'Aniversario', 'A');
 
 
 --
--- Name: conceptoingresoegreso_pk_concepto_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: conceptomovimiento_pk_concepto_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('conceptoingresoegreso_pk_concepto_seq', 5, true);
+SELECT pg_catalog.setval('conceptomovimiento_pk_concepto_seq', 5, true);
 
 
 --
@@ -721,6 +745,32 @@ INSERT INTO manzano VALUES (1, 1, '5', 'Lado el colegio PJU', 'A');
 --
 
 SELECT pg_catalog.setval('manzano_pk_manzano_seq', 1, true);
+
+
+--
+-- Data for Name: movimiento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO movimiento VALUES (1, 2, 1, '2015-07-29', 100, '                        aporte comunitario', '1', 'I');
+INSERT INTO movimiento VALUES (2, 6, 1, '2015-07-28', 50, '                        ', '1', 'I');
+INSERT INTO movimiento VALUES (3, 6, 1, '2015-07-28', 50, '                        ', '1', 'I');
+INSERT INTO movimiento VALUES (4, 6, 6, '2015-07-28', 1.5, 'prueba del formulario', '1', 'I');
+INSERT INTO movimiento VALUES (5, 6, 1, '2015-08-11', 10, 'aporte para la otb', '1', 'I');
+INSERT INTO movimiento VALUES (6, 6, 1, '2015-08-11', 30, 'por inasistencia al desfile', '2', 'I');
+INSERT INTO movimiento VALUES (7, 6, 2, '2015-08-11', 50, 'inasistencia de des...', '1', 'I');
+INSERT INTO movimiento VALUES (8, 6, 1, '2015-08-11', 10, 'inasistencia desfile', '2', 'I');
+INSERT INTO movimiento VALUES (9, 3, 5, '2015-08-11', 10.5, 'ddddddnnnn', '1', 'I');
+INSERT INTO movimiento VALUES (10, 3, 2, '2015-08-11', 20, 'limpieza parque', '3', 'I');
+INSERT INTO movimiento VALUES (11, 6, 5, '2015-08-11', 30, 'mantenimiento jardines', '3', 'I');
+INSERT INTO movimiento VALUES (12, 6, 3, '2015-08-11', 10, 'aporte mensual', '1', 'I');
+INSERT INTO movimiento VALUES (14, 6, 1, '2015-08-11', 10, 'verificar egreso', '1', 'E');
+
+
+--
+-- Name: movimiento_pk_movimiento_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('movimiento_pk_movimiento_seq', 16, true);
 
 
 --
@@ -795,15 +845,28 @@ SELECT pg_catalog.setval('rol_pk_rol_seq', 4, true);
 
 
 --
+-- Data for Name: total; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Name: total_pk_total_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('total_pk_total_seq', 1, false);
+
+
+--
 -- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO usuario VALUES (1, 1, 1, 'Administrador', 'Admin', 'Juan', 'Perez', 'Mamani', 'M', '1987-06-26', '1234567', '71234567', 'Av. Estudiante', '../foto.png', 'A');
+INSERT INTO usuario VALUES (1, 1, 1, 'otb', 'otb', '', '', '', 'NA', '1987-06-26', '', '', '', '', 'A');
+INSERT INTO usuario VALUES (6, 1, 2, 'Vecino', 'Arnold', 'Jaime Arnold', 'Huanca', 'Valle', 'M', '1980-01-01', '777777', '777777', 'cbba', '../img/foto.png', 'A');
+INSERT INTO usuario VALUES (5, 1, 2, 'Vecino', 'budita', 'Diego', 'Gonzales', 'Soto', 'M', '1987-06-26', '6543216', '79972123', 'Quillacollo', '../img/foto.png', 'A');
 INSERT INTO usuario VALUES (2, 1, 2, 'Presidente', 'Flaca', 'Claudia', 'Quijarro', 'Claros', 'F', '1999-01-10', '54321', '77654321', 'Av. Tronpillo', '../foto.png', 'A');
 INSERT INTO usuario VALUES (3, 1, 3, 'Secretaria', 'Oli', 'Olivia', 'Fajardo', 'Sanchez', 'F', '2000-06-09', '456789', '78901234', 'Calle. Naranjal', '../foto.png', 'A');
 INSERT INTO usuario VALUES (4, 1, 4, 'Vecino', 'Marce', 'Marcelino', 'Pan', 'Vino', 'M', '2001-12-10', '9876543', '76767676', 'Calle los pinos', '../foto.png', 'A');
-INSERT INTO usuario VALUES (5, 1, 2, 'Vesino', 'budita', 'Diego', 'Gonzales', 'Soto', 'M', '1987-06-26', '6543216', '79972123', 'Quillacollo', '../img/foto.png', 'A');
-INSERT INTO usuario VALUES (6, 1, 2, 'Vesino', 'Arnold', 'Jaime Arnold', 'Huanca', 'Valle', 'M', '1980-01-01', '777777', '777777', 'cbba', '../img/foto.png', 'A');
 
 
 --
@@ -822,14 +885,6 @@ ALTER TABLE ONLY anuncio
 
 
 --
--- Name: pk_aporte; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY aporte
-    ADD CONSTRAINT pk_aporte PRIMARY KEY (pk_aporte);
-
-
---
 -- Name: pk_asignado; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -841,7 +896,7 @@ ALTER TABLE ONLY asignado
 -- Name: pk_conceptoingresoegreso; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY conceptoingresoegreso
+ALTER TABLE ONLY conceptomovimiento
     ADD CONSTRAINT pk_conceptoingresoegreso PRIMARY KEY (pk_concepto);
 
 
@@ -867,6 +922,14 @@ ALTER TABLE ONLY gestion
 
 ALTER TABLE ONLY manzano
     ADD CONSTRAINT pk_manzano PRIMARY KEY (pk_manzano);
+
+
+--
+-- Name: pk_movimiento; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY movimiento
+    ADD CONSTRAINT pk_movimiento PRIMARY KEY (pk_movimiento);
 
 
 --
@@ -910,6 +973,14 @@ ALTER TABLE ONLY rol
 
 
 --
+-- Name: pk_total; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY total
+    ADD CONSTRAINT pk_total PRIMARY KEY (pk_total);
+
+
+--
 -- Name: pk_usuario; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -925,13 +996,6 @@ CREATE UNIQUE INDEX anuncio_pk ON anuncio USING btree (pk_anuncio);
 
 
 --
--- Name: aporte_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE UNIQUE INDEX aporte_pk ON aporte USING btree (pk_aporte);
-
-
---
 -- Name: asignado_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -942,7 +1006,7 @@ CREATE UNIQUE INDEX asignado_pk ON asignado USING btree (pk_asignado);
 -- Name: conceptoingresoegreso_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE UNIQUE INDEX conceptoingresoegreso_pk ON conceptoingresoegreso USING btree (pk_concepto);
+CREATE UNIQUE INDEX conceptoingresoegreso_pk ON conceptomovimiento USING btree (pk_concepto);
 
 
 --
@@ -964,6 +1028,13 @@ CREATE UNIQUE INDEX gestion_pk ON gestion USING btree (pk_gestion);
 --
 
 CREATE UNIQUE INDEX manzano_pk ON manzano USING btree (pk_manzano);
+
+
+--
+-- Name: movimiento_pk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX movimiento_pk ON movimiento USING btree (pk_movimiento);
 
 
 --
@@ -1012,7 +1083,7 @@ CREATE INDEX relationship_11_fk ON propiedad USING btree (pk_usuario);
 -- Name: relationship_12_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE INDEX relationship_12_fk ON aporte USING btree (pk_usuario);
+CREATE INDEX relationship_12_fk ON movimiento USING btree (pk_usuario);
 
 
 --
@@ -1075,7 +1146,7 @@ CREATE INDEX relationship_7_fk ON propiedad USING btree (pk_manzano);
 -- Name: relationship_9_fk; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE INDEX relationship_9_fk ON aporte USING btree (pk_gestion);
+CREATE INDEX relationship_9_fk ON movimiento USING btree (pk_gestion);
 
 
 --
@@ -1101,22 +1172,6 @@ ALTER TABLE ONLY anuncio
 
 
 --
--- Name: fk_aporte_relations_gestion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY aporte
-    ADD CONSTRAINT fk_aporte_relations_gestion FOREIGN KEY (pk_gestion) REFERENCES gestion(pk_gestion) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- Name: fk_aporte_relations_usuario; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY aporte
-    ADD CONSTRAINT fk_aporte_relations_usuario FOREIGN KEY (pk_usuario) REFERENCES usuario(pk_usuario) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
 -- Name: fk_asignado_relations_privileg; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1138,6 +1193,22 @@ ALTER TABLE ONLY asignado
 
 ALTER TABLE ONLY manzano
     ADD CONSTRAINT fk_manzano_relations_otb FOREIGN KEY (pk_otb) REFERENCES otb(pk_otb) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_movimiento_relations_gestion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY movimiento
+    ADD CONSTRAINT fk_movimiento_relations_gestion FOREIGN KEY (pk_gestion) REFERENCES gestion(pk_gestion) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_movimiento_relations_usuario; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY movimiento
+    ADD CONSTRAINT fk_movimiento_relations_usuario FOREIGN KEY (pk_usuario) REFERENCES usuario(pk_usuario) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
 --

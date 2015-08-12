@@ -4,15 +4,20 @@
 	$db = ManagerBDPostgres::getInstanceBDPostgres();
 	
 	$sqlUsuario  = $db->executeQuerySQL("SELECT * FROM usuario");
-	$sqlConcepto = $db->executeQuerySQL("SELECT * FROM conceptoingresoegreso");
+	$sqlConcepto = $db->executeQuerySQL("SELECT * FROM conceptomovimiento");
 	$sqlGestion  = $db->executeQuerySQL("SELECT * FROM gestion");
 	
-	$sqlAporte = $db->executeQuerySQL("SELECT * FROM aporte");
+	$sqlAporte = $db->executeQuerySQL("SELECT * FROM movimiento");
 	$monto_total = 0;
 	
 	while($total_aporte = $db->query_Fetch_Array($sqlAporte))
 	{
-		$monto_total = $monto_total + $total_aporte['int_ingrmonto'];
+		if ($total_aporte['vch_movtipoie'] == 'I')
+		{
+			$monto_total = $monto_total + $total_aporte['int_movmonto'];
+		}else{
+				$monto_total = $monto_total - $total_aporte['int_movmonto'];
+			 }
 	}
 ?>
 <!DOCTYPE html>
@@ -47,12 +52,10 @@
 	$(document).ready(function() {
         $("#formIngreso").validate({
 			rules: {
-				gestion: "required",
-				usuario  : "required",
 				actividad: "required",
 				monto: {
 					required: true,
-					minlength: 2,
+					minlength: 1,
 					//maxlength: 3
 				},
 				descrip: {
@@ -62,13 +65,11 @@
 				}
 			},
 			messages: {
-				gestion  : "Por favor seleccione la gestion",
-				usuario  : "Por favor seleccione un nombre",
 				actividad: "Por favor seleccione una actividad",
 				monto: {
-					required: "Ingrese el monto a pagar",
-					minlength: "Minimo debe ingresar 2 digitos enteros",
-					maxlength: "Maximo debe ingresar 3 digitos enteros"
+					required: "Ingrese el monto a retirar",
+					minlength: "Minimo debe ingresar 1 digito",
+					maxlength: "Maximo debe ingresar 3 digitos"
 				},
 				descrip: {
 					required: "Ingrese una descripcion",
@@ -101,7 +102,7 @@
 
 <div class="collapse navbar-collapse navbar-right">
 <ul class="nav navbar-nav" id="menu">
-<li class="active"><a href="index.php">Home</a></li>
+<li><a href="index.php">Home</a></li>
 <li><a href="#">Acerca de Nosotros</a></li>
 <li><a href="#">Servicios</a></li>
 <li><a href="#">Contacto</a></li>
@@ -113,20 +114,34 @@
 
 <div class="container" style="margin-top:15px; background-image:url(img/map-image.png);">
   <div class="row">
+  
+<div class="col-md-4 col-md-offset-4">
 
+<div class="panel panel-primary">
+    <div class="panel-heading">
+         <h3 class="panel-title">Saldo Actual</h3>
+    </div>
+    <div class="panel-body">
+        <div class="media-body">
+             <h3 class="media-heading"><?php echo $monto_total; ?></h3>
+        </div>
+    </div>
+</div>
+
+</div>
       <div class="col-md-4 col-md-offset-4">
           <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Registrar Egreso</h3>
+                <h3 class="panel-title">Registrar Salida de dinero</h3>
             </div>
               <div class="panel-body">
-                <form accept-charset="UTF-8" name="formIngreso" id="formIngreso" role="form" method="post" action="newAporte.php">
+                <form accept-charset="UTF-8" name="formIngreso" id="formIngreso" role="form" method="post" action="nuevo_egreso.php">
                       <fieldset>
                       <div class="form-group"></div>
                       <div class="form-group"></div>
                       <div class="form-group"></div>
                       <div class="form-group">
-                          <input class="form-control" placeholder="Monto a pagar (BS)" name="monto" id="monto" type="text" required>
+                          <input class="form-control" placeholder="Monto a retirar (BS)" name="monto" id="monto" type="text" required>
                       </div>
                       <div class="form-group">
                         <select name="actividad" id="actividad" class="form-control">
@@ -138,7 +153,13 @@
                                 }
                               ?>
                         </select>
-                        <textarea class="form-control" placeholder="Descripcion" name="descrip" id="descrip" required></textarea>
+                      </div>
+					  
+					  <div class="form-group">
+					  <textarea class="form-control" placeholder="Descripcion" name="descrip" id="descrip" required></textarea>
+					  </div>
+					  <div class="form-group">
+                          <input class="form-control" type="hidden" name="monto_total" id="monto_total" value="<?php $monto_total?>" required>
                       </div>
                     <div class="form-group">
                       <input class="btn btn-lg btn-success btn-block" name="enviar" id="enviar" type="submit" value="Aceptar">

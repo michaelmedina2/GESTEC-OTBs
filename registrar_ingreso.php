@@ -4,15 +4,20 @@
 	$db = ManagerBDPostgres::getInstanceBDPostgres();
 	
 	$sqlUsuario  = $db->executeQuerySQL("SELECT * FROM usuario");
-	$sqlConcepto = $db->executeQuerySQL("SELECT * FROM conceptoingresoegreso");
+	$sqlConcepto = $db->executeQuerySQL("SELECT * FROM conceptomovimiento");
 	$sqlGestion  = $db->executeQuerySQL("SELECT * FROM gestion");
 	
-	$sqlAporte = $db->executeQuerySQL("SELECT * FROM aporte");
+	$sqlAporte = $db->executeQuerySQL("SELECT * FROM movimiento");
 	$monto_total = 0;
 	
 	while($total_aporte = $db->query_Fetch_Array($sqlAporte))
 	{
-		$monto_total = $monto_total + $total_aporte['int_ingrmonto'];
+		if ($total_aporte['vch_movtipoie'] == 'I')
+		{
+			$monto_total = $monto_total + $total_aporte['int_movmonto'];
+		}else{
+				$monto_total = $monto_total - $total_aporte['int_movmonto'];
+			 }
 	}
 ?>
 <!DOCTYPE html>
@@ -101,7 +106,7 @@
 
 <div class="collapse navbar-collapse navbar-right">
 <ul class="nav navbar-nav" id="menu">
-<li class="active"><a href="index.php">Home</a></li>
+<li><a href="index.php">Home</a></li>
 <li><a href="#">Acerca de Nosotros</a></li>
 <li><a href="#">Servicios</a></li>
 <li><a href="#">Contacto</a></li>
@@ -135,7 +140,7 @@
                 <h3 class="panel-title">Registrar Aporte</h3>
             </div>
               <div class="panel-body">
-                <form accept-charset="UTF-8" name="formIngreso" id="formIngreso" role="form" method="post" action="newAporte.php">
+                <form accept-charset="UTF-8" name="formIngreso" id="formIngreso" role="form" method="post" action="nuevo_ingreso.php">
                       <fieldset>
                       <div class="form-group">
 						  <select name="gestion" id="gestion" class="form-control">
@@ -154,6 +159,7 @@
                               <?php
                               	while($dato = $db->query_Fetch_Array($sqlUsuario))
                                 {
+									if ($dato['pk_usuario']!= 1)									
 									echo"<option value=".$dato['pk_usuario'].">".$dato['vch_usuanombre']." ".$dato["vch_usuaapp"]."</option>";
                                 }
                               ?>

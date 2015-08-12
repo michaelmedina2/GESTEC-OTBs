@@ -3,7 +3,7 @@
     <div class="col-xs-7">
         <div class="jumbotron ">
             <h1>Gestec-OTBs</h1>
-            <p class="lead">Sistema de gestion economico de OTBs <br> Manejo y control de vesinos</p>
+            <p class="lead">Sistema de gestion economico de OTBs <br> Manejo y control de vecinos</p>
         </div>
     </div>
 </div>
@@ -36,8 +36,8 @@
                     <img class="img-responsive" src="img/services6.png">
                 </div>
                 <div class="media-body">
-                    <h3 class="media-heading">Administracion Contable</h3>
-                    <p>Manejo de dinero de las otbs, se encarga del estado financiero tanto como ingresos y egresos, emite reportes para la toma de desiciones</p>
+                    <h3 class="media-heading"><a href="registrar_movimiento.php">Administracion Contable</a></h3>
+                    <p>Manejo de dinero de las otbs, se encarga del estado financiero tanto como ingresos y egresos, emite reportes para la toma de decisiones</p>
                 </div>
             </div>
         </div>
