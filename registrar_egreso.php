@@ -159,7 +159,7 @@
 					  <textarea class="form-control" placeholder="Descripcion" name="descrip" id="descrip" required></textarea>
 					  </div>
 					  <div class="form-group">
-                          <input class="form-control" type="hidden" name="monto_total" id="monto_total" value="<?php $monto_total?>" required>
+                          <input class="form-control" type="hidden" name="monto_total" id="monto_total" value=<?php $monto_total?> required>
                       </div>
                     <div class="form-group">
                       <input class="btn btn-lg btn-success btn-block" name="enviar" id="enviar" type="submit" value="Aceptar">

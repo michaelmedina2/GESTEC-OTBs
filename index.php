@@ -52,7 +52,7 @@
     	<div class="col-xs-5"> <img src="img/portada.png" class="img-responsive"> </div>
         <div class="col-xs-7">
             <div class="jumbotron ">
-            	<h1>Gestec-OTBs Modificado</h1>
+            	<h1>Gestec-OTBs</h1>
             	<p class="lead">Sistema de gestion economico de OTBs <br> Manejo y control de vecinos</p>
             </div>
         </div>
@@ -69,7 +69,7 @@
                        	<img class="img-responsive" src="img/services3.png">
                     </div>
                     <div class="media-body">
-                      	<h3 class="media-heading"><a href="#">Control de Vecinos</a></h3>
+                      	<h3 class="media-heading"><a href="admin/registro.php">Control de Vecinos</a></h3>
                         <p>Maneja usuarios, gestiona el control de asistencia a reuniones y control de faltas y sanciones</p>
                     </div>
                 </div>
