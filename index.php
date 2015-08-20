@@ -52,7 +52,7 @@
     	<div class="col-xs-5"> <img src="img/portada.png" class="img-responsive"> </div>
         <div class="col-xs-7">
             <div class="jumbotron ">
-            	<h1>Gestec-OTBs</h1>
+            	<h1>Gestec-OTBs Modificado</h1>
             	<p class="lead">Sistema de gestion economico de OTBs <br> Manejo y control de vecinos</p>
             </div>
         </div>
