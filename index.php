@@ -1,110 +1,80 @@
+<?php
+	session_start();
+	require_once "class/login.class.php";
+
+	if($_SESSION["name"])
+	{
+		header ("Location: modulo/index.php");
+	}
+?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Acceso</title>
 
-    <title>.- GESTEC OTB -.</title>
-
-    <link rel="icon" href="gotb2.png">
+	<link rel="icon" href="gotb2.png">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="js/jquery.js" type="text/javascript"></script>
+	<style type="text/css">
+		.alert-danger-alt { border-color: #B63E5A;background: #E26868;color: #fff; }
+    </style>
+
+    <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/script.js"></script>
 
 </head>
-
 <body>
 
-<header id="header">
-	<nav class="navbar navbar-inverse">
-    	<div class="container">
-        	<div class="navbar-header">
-            	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                	<span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php"><img src="img/logoGestec-OTB.png" alt="logo" width="130"></a>
-            </div>
-
-            <div class="collapse navbar-collapse navbar-right">
-            	<ul class="nav navbar-nav" id="menu">
-                	<li class="active"><a href="home.php">Home</a></li>
-                    <li><a href="page1.php">Acerca de Nosotros</a></li>
-                    <li><a href="page2.php">Servicios</a></li>
-                    <li><a href="page3.php">Contactos</a></li>
-                </ul>
-            </div>
-        </div><!--/.container-->
-    </nav><!--/nav-->
-</header><!--/header-->
-
-<div class="container" id="central" style="background-image:url(img/map-image.png)">
-
+<div class="container" style="margin-top:100px;">
 	<div class="row">
-    	<div class="col-xs-5"> <img src="img/portada.png" class="img-responsive"> </div>
-        <div class="col-xs-7">
-            <div class="jumbotron ">
-            	<h1>Gestec-OTBs</h1>
-            	<p class="lead">Sistema de gestion economico de OTBs <br> Manejo y control de vecinos</p>
+    	<div class="col-md-4 col-md-offset-4">
+        	<center>
+        	<img src="img/logoLogin.png" height="110">
+            </center>
+        	<div class="panel panel-default">
+                <div class="panel-heading">
+            		<h3 class="panel-title">Acceso</h3>
+        		</div>
+          		<div class="panel-body">
+					<?php
+        				if (isset($_GET['error']))
+						{
+            				echo '<div class="alert alert-danger-alt alert-dismissable">
+                        		  	<span class="glyphicon glyphicon-certificate"></span>
+                        			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<strong>Acceso Denegado</strong>
+									Revise que sus datos de acceso al sistema sean correctos y vuelva a intentarlo.
+							      </div>';
+        				} else {
+            				echo '';
+        				}
+        			?>
+
+            		<form  method="post" action="login.php">
+                    	<fieldset>
+                			<div class="form-group">
+                  				<input class="form-control" placeholder="username" name="username" id="username" type="text" required>
+              				</div>
+              				<div class="form-group">
+                				<input class="form-control" placeholder="password" name="password" id="password" type="password" value="" required>
+              				</div>
+              				<input class="btn btn-lg btn-success btn-block" type="submit" name="login" id="login" value="Iniciar sesión">
+            			</fieldset>
+              		</form>
+              		<p></p>
+               		<a class="btn btn-lg btn-info btn-block" href="registro.php">Registrarme</a>
+          		</div>
             </div>
         </div>
     </div>
-
-    <div class="row">
-    	<div class="col-xs-6">
-        	<div class="panel panel-primary">
-            	<div class="panel-heading">
-                	<h3 class="panel-title">Gestion de OTBs</h3>
-                </div>
-                <div class="panel-body">
-                	<div class="pull-left">
-                       	<img class="img-responsive" src="img/services3.png">
-                    </div>
-                    <div class="media-body">
-                      	<h3 class="media-heading"><a href="admin/registro.php">Control de Vecinos</a></h3>
-                        <p>Maneja usuarios, gestiona el control de asistencia a reuniones y control de faltas y sanciones</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-6">
-          	<div class="panel panel-primary">
-               	<div class="panel-heading">
-                   	<h3 class="panel-title">Gestion Monetario</h3>
-                </div>
-                <div class="panel-body">
-                   	<div class="pull-left">
-                       	<img class="img-responsive" src="img/services6.png">
-                    </div>
-                    <div class="media-body">
-                       	<h3 class="media-heading"><a href="registrar_movimiento.php">Administracion Contable</a></h3>
-                        <p>Manejo de dinero de las otbs, se encarga del estado financiero tanto como ingresos y egresos, emite reportes para la toma de decisiones</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div> <!--/#end container-->
-
-<footer id="footer" class="midnight-blue panel-footer">
-	<div class="container">
-    	<div class="row">
-        	<div class="col-xs-12">
-			&copy; 2015 <a target="_self" href="index.php">Equipo Anonimos </a>. @Todos los derechos reservados.
-			</div>
-        </div>
-    </div>
-</footer><!--/#footer-->
+</div>
 
 </body>
 </html>

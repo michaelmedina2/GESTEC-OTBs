@@ -1,6 +1,62 @@
-body{
-	background:#999;
+html, body { 
+	
 }
-.columna {
-	background:#CCC;
+
+body{
+	background-image:url(../img/map-image.png);
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size:cover;
+	background-color:#999; 
+}
+.columna {}
+
+#anuncio{}
+
+.cajon{
+	border:solid;
+	height:100px;
+}
+
+#footer{
+	background:#333;
+	color:#FFF;
+}
+
+.contenedor {
+	padding-bottom:20px;
+	padding-left:20px;
+	padding-right:20px;
+ 	width: 100%;
+ 	margin:auto;
+ 	overflow: hidden;
+}
+
+.contenido {
+	width: 75%;
+ 	background: #efefef;
+ 	padding: 10px 10px 10px 10px;
+ 	float: left;
+}
+
+.sidebar {
+ 	float: right;
+ 	width: 25%;
+ 	background: #666666;
+ 	padding: 2px;
+ 	color:#ffffff;
+}
+
+#contenidoCRUD{
+	width:300px;
+	height:auto;
+	padding:10px 10px 10px 10px;
+}
+
+.btnView{
+	
 }
