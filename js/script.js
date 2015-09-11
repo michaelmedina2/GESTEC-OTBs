@@ -14,4 +14,6 @@ $(document).ready(function() {
 
 	$('#gridx').DataTable();
 
+	$( "#roles-tabs" ).tabs();
+    $( ".radio" ).buttonset();
 });

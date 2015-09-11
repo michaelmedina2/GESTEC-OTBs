@@ -42,7 +42,8 @@ class Library
 		$this->js['lib_bootstrap']   = $directoryJS . 'bootstrap.min.js';
         $this->js['lib_dataTables1'] = $directoryJS . 'jquery.dataTables.min.js';
         $this->js['lib_dataTables2'] = $directoryJS . 'dataTables.bootstrap.min.js';
-		$this->js['lib_dataTables3'] = $directoryJS . 'dataTables.responsive.min.js';        
+		$this->js['lib_dataTables3'] = $directoryJS . 'dataTables.responsive.min.js';
+		$this->js['lib_jqueryui']    = $directoryJS . 'jquery-ui.js';        
 		$this->js['lib_jvalidate']   = $directoryJS . 'jquery.validate.js';
 		$this->js['lib_jscript']     = $directoryJS . 'script.js';
 	}
@@ -55,6 +56,7 @@ class Library
 		$this->css['css_bootstrap2'] = $directoryCSS . 'bootstrap-theme.min.css';
 		$this->css['css_dataTable1'] = $directoryCSS . 'dataTables.bootstrap.min.css';
 		$this->css['css_dataTable2'] = $directoryCSS . 'responsive.bootstrap.min.css';
+		$this->css['css_jqueryui']   = $directoryCSS . 'jquery-ui.css';
 		$this->css['css_style']      = $directoryCSS . 'style.css';
     }
 

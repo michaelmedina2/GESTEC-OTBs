@@ -61,3 +61,11 @@ body{
 .btnView{
 
 }
+
+#div-middle-content {
+    width: 78%;
+}
+
+#div-right-content {
+    width: 20%;
+}
