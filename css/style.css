@@ -1,5 +1,5 @@
-html, body { 
-	
+html, body {
+
 }
 
 body{
@@ -11,7 +11,7 @@ body{
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size:cover;
-	background-color:#999; 
+	background-color:#999;
 }
 .columna {}
 
@@ -28,7 +28,7 @@ body{
 }
 
 .contenedor {
-	padding-bottom:20px;
+	padding-bottom:10px;
 	padding-left:20px;
 	padding-right:20px;
  	width: 100%;
@@ -54,9 +54,10 @@ body{
 #contenidoCRUD{
 	width:300px;
 	height:auto;
+	text-align: center;
 	padding:10px 10px 10px 10px;
 }
 
 .btnView{
-	
+
 }

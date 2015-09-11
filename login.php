@@ -1,41 +1,26 @@
 <?php
 	session_start();
-	require_once "class/dbmanager.class.php";
-
-	if(isset($_POST["login"]))
-	{
-		$username = $_POST["username"];
-		$password = $_POST["password"];
-
-		$usuario = login_users($username, $password);
-
-		if($usuario == true)
-		{
-			header("Location: modulo/inicio/index.php");
-		}
-
-		if($usuario == false)
-		{
-			header("Location: index.php?error");
-		}
+	
+	include_once("class/library.class.php");
+	
+	$librerias = new Library();
+	
+	include_once("class/sesion.class.php");
+	
+	$username = $_POST["username"];
+	$password = $_POST["password"];
+	
+	$login = Sesion::getInstance();
+	
+	$login->iniciarSesion($username, $password);	
+	$login->getError();
+	
+	if( $login->iniciado() ) 
+	{    
+		header('location: modulo/inicio/index.php');
 	}
-
-	function login_users($username, $password)
-	{
-		$db = ManagerBDPostgres::getInstanceBDPostgres();
-		$sql = $db->executeQuerySQL("select * from usuario where vch_usuausername='$username' and vch_usuaci='$password';");
-
-		if($db->query_Num_Rows($sql)==1)
-		{
-			$row = $db->query_Fetch_Array($sql);
-			$user = $row[vch_usuausername];
-			$pass = $row[vch_usuaci];
-			$_SESSION["name"]  = $row[vch_usuausername];
-			$_SESSION["rol"]   = $row[vch_usuatipousuario];
-			$_SESSION["idRol"] = $row[pk_rol];
-			return true;
-		}else{
-			return false;
-		}
+	else {
+		$error = "";		
+		header("location: index.php");
 	}
 ?>

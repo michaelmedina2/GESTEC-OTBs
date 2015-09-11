@@ -1,12 +1,20 @@
 <?php
 	session_start();
-	require_once "class/login.class.php";
-
-	if($_SESSION["name"])
+	
+	include_once("class/library.class.php");
+	
+	$librerias = new Library();
+	
+	include_once("class/sesion.class.php");
+	
+	$sesion = Sesion::getInstance();
+	
+	if($sesion->iniciado() == TRUE)
 	{
-		header ("Location: modulo/index.php");
+		header('location: ' . $librerias->getDirectory('dir_module') . "inicio/index.php");
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,17 +25,17 @@
 
 	<link rel="icon" href="gotb2.png">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?php echo $librerias->getCSS("css_bootstrap1"); ?>">
+    <link rel="stylesheet" href="<?php echo $librerias->getCSS("css_bootstrap2"); ?>">
+    <link rel="stylesheet" href="<?php echo $librerias->getCSS("css_style"); ?>">
 
 	<style type="text/css">
 		.alert-danger-alt { border-color: #B63E5A;background: #E26868;color: #fff; }
     </style>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/script.js"></script>
+    <script src="<?php echo $librerias->getJS("lib_jquery"); ?>"></script>
+    <script src="<?php echo $librerias->getJS("lib_bootstrap"); ?>"></script>
+	<script src="<?php echo $librerias->getJS("lib_jscript"); ?>"></script>
 
 </head>
 <body>

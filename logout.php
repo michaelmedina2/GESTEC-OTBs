@@ -1,5 +1,9 @@
 <?php
 	session_start();
-	session_destroy();
-	header("Location: index.php");
+	include_once("class/library.class.php");	
+	$librerias = new Library();	
+	include_once("class/sesion.class.php");	
+	$sesion = Sesion::getInstance();	
+	$sesion->cerrarSesion();	
+	header('location: index.php');
 ?>

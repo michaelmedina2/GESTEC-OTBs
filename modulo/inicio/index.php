@@ -1,9 +1,24 @@
 <?php
 	session_start();
-	if(isset($_SESSION['name']))
-	{}else{
-		header("Location: ../../index.php");
+	
+	$path = "../../";
+	include_once("../../class/library.class.php");
+	
+	$lib = new Library($path);
+	
+	include_once("../../class/sesion.class.php");
+		
+	$sesion = Sesion::getInstance();
+	
+	if($sesion->iniciado() == 0) {
+		header('location: ' . $path . 'index.php');
 	}
+	
+	$idUsuario = $sesion->obtener('idUsuario');
+	$nombreModulo = 'Inicio';
+	
+	$dirModulos = $lib->getDirectory('dir_module');
+	$dirUpload  = $lib->getDirectory('dir_upload');	
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,41 +32,18 @@
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
 
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap1"); ?>">
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap2"); ?>">
+ 	<link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable1"); ?>">
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable2"); ?>">
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_style"); ?>">
 
- 	<link rel="stylesheet" href="../../js/DataTables/media/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="../../js/DataTables/media/css/responsive.bootstrap.min.css">
-
-    <link rel="stylesheet" href="../../css/style.css">
-
-    <script src="../../js/jquery.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
-
-    <script src="../../js/DataTables/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="../../js/DataTables/media/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../js/DataTables/media/js/dataTables.responsive.min.js" type="text/javascript"></script>
-
-
-    <script type="text/javascript">
-		$(document).ready(function() {
-
-			$("#menu a").each(function() {
-				var href = $(this).attr("href");
-				$(this).attr({href : "#"});
-				$(this).click(function() {
-					$("#central").load(href);
-				});
-			});
-
-			$("#btnView").click(function(){
-				$("#central").load("viewrol.php");
-			});
-
-			$('#gridx').DataTable();
-
-		});
-    </script>
+    <script src="<?php echo $lib->getJS("lib_jquery"); ?>" type="text/javascript"></script>
+    <script src="<?php echo $lib->getJS("lib_bootstrap"); ?>" type="text/javascript"></script>
+    <script src="<?php echo $lib->getJS("lib_dataTables1"); ?>" type="text/javascript"></script>
+    <script src="<?php echo $lib->getJS("lib_dataTables2"); ?>" type="text/javascript"></script>
+    <script src="<?php echo $lib->getJS("lib_dataTables3"); ?>" type="text/javascript"></script>
+	<script src="<?php echo $lib->getJS("lib_jscript"); ?>" type="text/javascript"></script>
 
 </head>
 <body>
@@ -64,16 +56,23 @@
 
 
 <nav class="navbar navbar-inverse">
-    <?php
-        include_once("../../system/menu.php");
+     <?php
+        $menuItem = 'Inicio';        
+        $idRol    = $sesion->obtener('idRol');
+		$nameUser = $sesion->obtener("nombreUsuario");  
+		include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
 
 
 <div class="container-fluid contenedor">
 	<div class="row">
-    	<?php include_once("../../system/section.php"); ?>
-      	<?php include_once("../../system/side.php"); ?>
+    	<div class="col-xs-8 contenido" id="central">
+    		<?php include_once("../../system/section.php"); ?>
+        </div>
+        <div class="col-xs-4 sidebar" id="noticia">
+      		<?php include_once("../../system/side.php"); ?>
+        </div>
 	</div>
 </div>
 

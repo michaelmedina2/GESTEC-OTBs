@@ -7,5 +7,5 @@
 	$estado = $_POST['estado'];
 	
 	$sqlRol = $db->executeQuerySQL("UPDATE rol SET vch_rolnombre = '$nombre', vch_rolestado = '$estado' WHERE pk_rol = '$id'");
-	header("location: ../index.php");
+	header("location: index.php");
 ?>

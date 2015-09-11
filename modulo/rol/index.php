@@ -1,80 +1,125 @@
 <?php
-	include("../../class/dbmanager.class.php");
-	$db = ManagerBDPostgres::getInstanceBDPostgres();			
-?><head>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/bootstrap-theme.min.css">
-    
- 	<link rel="stylesheet" href="../../js/DataTables/media/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="../../js/DataTables/media/css/responsive.bootstrap.min.css">
-     
-    <link rel="stylesheet" href="../../css/style.css">
+	session_start();
 
-    <script src="../../js/jquery.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
-	 
-    <script src="../../js/DataTables/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="../../js/DataTables/media/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../js/DataTables/media/js/dataTables.responsive.min.js" type="text/javascript"></script>
- 
-            
-    <script type="text/javascript">
-		$(document).ready(function() {
-			
-			$("a").each(function() {
-				var href = $(this).attr("href");
-				$(this).attr({href : "#"});
-				$(this).click(function() {
-					$("#contenidoCRUD").load(href);
-				});
-			});
+	$path = "../../";
+	include_once("../../class/library.class.php");
 
-			$("#btnNew").click(function(){
-				$("#contenidoCRUD").load("rol/newrol.php");
-			});
-			
-			$('#gridx').DataTable();
-			
-		});
-    </script>
+	$lib = new Library($path);
+
+	include_once("../../class/sesion.class.php");
+
+	$sesion = Sesion::getInstance();
+
+	if($sesion->iniciado() == 0) {
+		header('location: ' . $path . 'index.php');
+	}
+
+	$idUsuario = $sesion->obtener('idUsuario');
+	$nombreModulo = 'Rol';
+
+	$dirModulos = $lib->getDirectory('dir_module');
+	$dirUpload  = $lib->getDirectory('dir_upload');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>.- GESTEC OTB -.</title>
+
+    <!-- Bootstrap -->
+    <link rel="icon" href="../../gotb2.png">
+
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap1"); ?>">
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap2"); ?>">
+ 	<link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable1"); ?>">
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable2"); ?>">
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_style"); ?>">
+
+    <script src="<?php echo $lib->getJS("lib_jquery"); ?>" type="text/javascript"></script>
+    <script src="<?php echo $lib->getJS("lib_bootstrap"); ?>" type="text/javascript"></script>
+    <script src="<?php echo $lib->getJS("lib_dataTables1"); ?>" type="text/javascript"></script>
+    <script src="<?php echo $lib->getJS("lib_dataTables2"); ?>" type="text/javascript"></script>
+    <script src="<?php echo $lib->getJS("lib_dataTables3"); ?>" type="text/javascript"></script>
+	<script src="<?php echo $lib->getJS("lib_jscript"); ?>" type="text/javascript"></script>
 
 </head>
+<body>
 
-<a href="#" class="btn btn-primary" id="btnNew">New</a>
-<center>
+<header id="header">
+	<?php
+    	include_once("../../system/header.php");
+	?>
+</header>
 
-<div id="contenidoCRUD"></div>
-<caption> <h1>Gestion Roles</h1></caption>
-<table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">	       
-    <thead>
-        <tr>
-            <th>Nombre Rol</th>
-            <th>Estado</th>
-            <th>Control</th>
-        </tr>
-    </thead>
-    <tbody> 
-    	<?php
-        	$sqlRol = $db->executeQuerySQL("select * from rol");
-			
-			while($row=$db->query_Fetch_Array($sqlRol))
-			{
-		?>      	
-        <tr>
-        	<td><?php echo $row[vch_rolnombre]; ?></td>
-			<td><center><?php echo $row[vch_rolestado]; ?></center></td>
-			<td>
-            	<center>
-            	<div class="btn-group btn-group-xs">
-                  <a href="rol/viewrol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-success btnView">Vista</a>
-                  <a href="rol/updaterol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
-                </div>
-                </center>
-            </td>
-        </tr>                 
-        <?php
-			}
-		?>
-    </tbody>
-</table>
-</center>
+
+<nav class="navbar navbar-inverse">
+     <?php
+        
+        $idRol    = $sesion->obtener('idRol');
+		$nameUser = $sesion->obtener("nombreUsuario");
+		include_once("../../system/menu.php");
+    ?>
+</nav><!--/nav-->
+
+
+<div class="container-fluid contenedor">
+	<div class="row">
+    	<div class="col-xs-8 contenido" id="central">
+    		
+            
+            <a href="newrol.php" class="btn btn-primary" id="btnNew">New</a>
+            <center>
+            
+            <caption> <h1>Gestion Roles</h1></caption>
+            <table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">	       
+                <thead>
+                    <tr>
+                        <th>Nombre Rol</th>
+                        <th>Estado</th>
+                        <th>Control</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <?php
+                        $sqlRol = $db->executeQuerySQL("select * from rol");
+                        
+                        while($row=$db->query_Fetch_Array($sqlRol))
+                        {
+                    ?>      	
+                    <tr>
+                        <td><?php echo $row[vch_rolnombre]; ?></td>
+                        <td><center><?php echo $row[vch_rolestado]; ?></center></td>
+                        <td>
+                            <center>
+                            <div class="btn-group btn-group-xs">
+                              <a href="viewrol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-success btnView">Vista</a>
+                              <a href="updaterol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
+                              <a href="delete.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-info" id="btnUpdate">Baja</a>
+                            </div>
+                            </center>
+                        </td>
+                    </tr>                 
+                    <?php
+                        }
+                    ?>
+                </tbody>
+            </table>
+            </center>
+            
+        </div>
+        <div class="col-xs-4 sidebar" id="noticia">
+      		<?php include_once("../../system/side.php"); ?>
+        </div>
+	</div>
+</div>
+
+
+<footer id="footer" class="panel-footer">
+    <?php include_once("../../system/footer.php"); ?>
+</footer><!--/#footer-->
+
+</body>
+</html>

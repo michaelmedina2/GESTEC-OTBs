@@ -1,20 +1,18 @@
-<?
+<?php
 	include_once("../class/dbmanager.class.php");
 	$db = ManagerBDPostgres::getInstanceBDPostgres();
 
-	$idRol = $_SESSION['idRol'];
-
 	$sql = "SELECT * "
-        . "FROM asignado as a, privilegio as p "
-        . "WHERE pk_rol = $idRol "
-        . "AND int_asigprivilegioasignado <> 0 "
-        . "AND a.pk_privilegio = p.pk_privilegio";
+         . "FROM asignado as a, privilegio as p "
+         . "WHERE pk_rol = $idRol "
+         . "AND int_asigprivilegioasignado <> 0 "
+         . "AND a.pk_privilegio = p.pk_privilegio";
 
 	$sqlMenu = $db->executeQuerySQL($sql);
-    $row = $db->query_Fetch_Array($sqlMenu);
 ?>
 
 <div class="container">
+
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -27,12 +25,28 @@
 
     <div class="collapse navbar-collapse navbar-right">
         <ul class="nav navbar-nav" id="menu">
-            <li class="active"><a href="home.php">Inicio</a></li>
-            <li><a href="../rol/index.php">Rol</a></li>
-            <li><a href="#">Servicios</a></li>
+          
+        <?php
+        	while($row = $db->query_Fetch_Array($sqlMenu))
+			{
+				$nombre = $row[vch_privnombre];
+				$url    = $row[vch_privpath];
+				if($nombre == $nombreModulo)
+				{
+		?>
+            <li class="active"><a href="<?php echo $dirModulos . $url; ?>"> <?php echo $nombre; ?> </a></li>
+        <?php
+			}else{
+		?>    
+        	<li class=""><a href="<?php echo $dirModulos . $url; ?>"> <?php echo $nombre; ?> </a></li>
+        <?php
+				}
+			}
+        ?>    
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="../../logout.php">Cerrar Sesion [<?php echo $_SESSION['name']."-".$_SESSION['rol']; ?>]</a></li>
+            <li><a href="../../logout.php">Salir [<?php echo $nameUser; ?>]</a></li>
         </ul>
     </div>
+
 </div><!--/.container-->
