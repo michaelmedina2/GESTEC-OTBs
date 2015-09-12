@@ -99,7 +99,7 @@
 					$row   = $db->query_Fetch_Array($sqlRol);
                     $rolId = $row[pk_rol];
                     $rolNombre = $row[vch_rolnombre];
-                    echo "<li><a href=\"#tab-$rolId\">$rolNombre</a></li>";
+                    echo "<li><a href='#tab-$rolId'>$rolNombre</a></li>";
                     $listaIDRoles[] = $rolId;
                 }
             ?>

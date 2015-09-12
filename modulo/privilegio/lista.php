@@ -1,14 +1,14 @@
 <?php
-$consulta = "SELECT * " .
-            " FROM privilegio as p, asignado as a " . 
-            " WHERE a.pk_rol = $rolId AND p.pk_privilegio = a.pk_privilegio;";
-
-$sql = $db->executeQuerySQL($consulta);        
-$numRows = $db->query_Num_Rows($sql);
+	$consulta = "SELECT * " .
+				" FROM privilegio as p, asignado as a " . 
+				" WHERE a.pk_rol = $rolId AND p.pk_privilegio = a.pk_privilegio;";
+	
+	$sql = $db->executeQuerySQL($consulta);        
+	$numRows = $db->query_Num_Rows($sql);
 ?>
 <div id="tab-<?php echo "$rolId"; ?>">
     <form method="post" action="actualizar.php" id="form-<?php echo "$rolId"; ?>">
-    <table>
+    <table class="table">
         <tr>
             <th>Modulo</th>
             <th>Privilegio</th>
@@ -29,43 +29,43 @@ $numRows = $db->query_Num_Rows($sql);
                 <td class="td-privilegios">
                     <div class="radio">
                     <?php
-                        if($privilegioAdministrador == "VERDADERO") 
+                        if($privilegioAdministrador == true) 
 						{
                             if($privilegioAsignado == 1) 
 							{
-                                echo "<input type=\"radio\" id=\"radio-admin-$id\" name=\"radio-$id\" checked=\"checked\" value=\"1\" />";
-                                echo "<label for=\"radio-admin-$id\">Administrador</label>";
+                                echo "<input type='radio' id='radio-admin-$id' name='radio-$id' checked='checked' value='1' />";
+                                echo "<label for='radio-admin-$id'>Administrador</label>";
                             } else {
-                                echo "<input type=\"radio\" id=\"radio-admin-$id\" name=\"radio-$id\" value=\"1\" />";
-                                echo "<label for=\"radio-admin-$id\">Administrador</label>";
+                                echo "<input type='radio' id='radio-admin-$id' name='radio-$id' value='1' />";
+                                echo "<label for='radio-admin-$id'>Administrador</label>";
                             }
                         } else {
-                            echo "<input type=\"radio\" id=\"radio-admin-$id\" name=\"radio-$id\" value=\"1\" disabled=\"disabled\" />";
-                            echo "<label for=\"radio-admin-$id\">Administrador</label>";
+                            echo "<input type='radio' id='radio-admin-$id' name='radio-$id' value='1' disabled='disabled' />";
+                            echo "<label for='radio-admin-$id'>Administrador</label>";
                         }
                                                 
-                        if($privilegioCliente == "VERDADERO") 
+                        if($privilegioCliente == true) 
 						{
                             if($privilegioAsignado == 2) 
 							{
-                                echo "<input type=\"radio\" id=\"radio-client-$id\" name=\"radio-$id\" checked=\"checked\" value=\"2\" />";
-                                echo "<label for=\"radio-client-$id\">Cliente</label>";
+                                echo "<input type='radio' id='radio-client-$id' name='radio-$id' checked='checked' value='2' />";
+                                echo "<label for='radio-client-$id'>Cliente</label>";
                             } else {
-                                echo "<input type=\"radio\" id=\"radio-client-$id\" name=\"radio-$id\" value=\"2\" />";
-                                echo "<label for=\"radio-client-$id\">Cliente</label>";
+                                echo "<input type='radio' id='radio-client-$id' name='radio-$id' value='2' />";
+                                echo "<label for='radio-client-$id'>Cliente</label>";
                             }
                         } else {
-                            echo "<input class=\"radio-disabled\" type=\"radio\" id=\"radio-client-$id\" name=\"radio-$id\" value=\"2\" disabled=\"disabled\" />";
-                            echo "<label for=\"radio-client-$id\">Cliente</label>";
+                            echo "<input class='radio-disabled' type='radio' id='radio-client-$id' name='radio-$id' value='2' disabled='disabled' />";
+                            echo "<label for='radio-client-$id'>Cliente</label>";
                         }
                         
                         if($privilegioAsignado == 0) 
 						{
-                            echo "<input type=\"radio\" id=\"radio-none-$id\" name=\"radio-$id\" checked=\"checked\" value=\"0\" />";
-                            echo "<label for=\"radio-none-$id\">Ninguno</label>";
+                            echo "<input type='radio' id='radio-none-$id' name='radio-$id' checked='checked' value='0' />";
+                            echo "<label for='radio-none-$id'>Ninguno</label>";
                         } else {
-                            echo "<input type=\"radio\" id=\"radio-none-$id\" name=\"radio-$id\" value=\"0\" />";
-                            echo "<label for=\"radio-none-$id\">Ninguno</label>";
+                            echo "<input type='radio' id='radio-none-$id' name='radio-$id' value='0' />";
+                            echo "<label for='radio-none-$id'>Ninguno</label>";
                         }                        
                     ?>
                     </div>
