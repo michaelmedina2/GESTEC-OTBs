@@ -15,7 +15,7 @@
 	}
 
 	$idUsuario = $sesion->obtener('idUsuario');
-	$nombreModulo = 'Rol';
+	$nombreModulo = 'Actividad';
 
 	$dirModulos = $lib->getDirectory('dir_module');
 	$dirUpload  = $lib->getDirectory('dir_upload');
@@ -70,34 +70,34 @@
     	<div class="col-xs-8 contenido" id="central">
     		
             
-            <a href="newrol.php" class="btn btn-primary" id="btnNew">Nuevo</a>
+            <a href="new.php" class="btn btn-primary" id="btnNew">Nueva</a>
             <center>
             
-            <caption> <h1>Gesti&oacute;n de Roles</h1></caption>
+            <caption> <h1>Gesti&oacute;n de Actividades</h1></caption>
             <table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">	       
                 <thead>
                     <tr>
-                        <th>Nombre Rol</th>
+                        <th>Actividad</th>
+                        <th>Tipo</th>
                         <th>Estado</th>
                         <th>Control</th>
                     </tr>
                 </thead>
                 <tbody> 
                     <?php
-                        $sqlRol = $db->executeQuerySQL("select * from rol");
-                        
-                        while($row=$db->query_Fetch_Array($sqlRol))
-                        {
+                        $sqlActividad = $db->executeQuerySQL("SELECT * FROM conceptomovimiento ORDER BY vch_catenombre;");
+                        while ($row = $db->query_Fetch_Array($sqlActividad)) {
                     ?>      	
                     <tr>
-                        <td><?php echo $row[vch_rolnombre]; ?></td>
-                        <td><center><?php if ($row[vch_rolestado] == 'A') { echo "Activo"; } if ($row[vch_rolestado] == 'I') { echo "Inactivo"; } ?></center></td>
+                        <td><?php echo $row['vch_catenombre']; ?></td>
+                        <td><center><?php if ($row['vch_tipoconcepto'] == 'I') { echo "Ingreso"; } if ($row['vch_tipoconcepto'] == 'E') { echo "Egreso"; } ?></center></td>
+                        <td><center><?php if ($row['vch_cateestado'] == 'A') { echo "Activo"; } if ($row['vch_cateestado'] == 'I') { echo "Inactivo"; } ?></center></td>
                         <td>
                             <center>
                             <div class="btn-group btn-group-xs">
-                              <a href="viewrol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-success btnView">Vista</a>
-                              <a href="updaterol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
-                              <a href="delete.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-info" id="btnUpdate">Baja</a>
+                              <a href="viewactivity.php?id=<?php echo $row['pk_concepto']; ?>" class="btn btn-success btnView">Vista</a>
+                              <a href="updateactivity.php?id=<?php echo $row['pk_concepto']; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
+                              <a href="activate.php?id=<?php echo $row['pk_concepto']; ?>&est=<?php $accion = ''; if ($row['vch_cateestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>" class="btn btn-info" id="btnUpdate"><?php echo $accion; ?></a>
                             </div>
                             </center>
                         </td>
