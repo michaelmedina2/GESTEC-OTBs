@@ -95,9 +95,9 @@
                         <td>
                             <center>
                             <div class="btn-group btn-group-xs">
-                              <a href="viewrol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-success btnView">Vista</a>
                               <a href="updaterol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
-                              <a href="delete.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-info" id="btnUpdate">Baja</a>
+                              <a href="delete.php?id=<?php echo $row[pk_rol]; ?>&est=<?php $accion = ''; if ($row['vch_rolestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>" class="btn btn-info" id="btnUpdate"><?php echo $accion; ?></a>
+                            </div>
                             </div>
                             </center>
                         </td>

@@ -95,8 +95,8 @@
                         <td>
                             <center>
                             <div class="btn-group btn-group-xs">
-                              <a href="viewactivity.php?id=<?php echo $row['pk_concepto']; ?>" class="btn btn-success btnView">Vista</a>
-                              <a href="updateactivity.php?id=<?php echo $row['pk_concepto']; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
+                              <!--<a href="viewactivity.php?id=<?php //echo $row['pk_concepto']; ?>" class="btn btn-success btnView">Vista</a>-->
+                              <a href="modify.php?id=<?php echo $row['pk_concepto']; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
                               <a href="activate.php?id=<?php echo $row['pk_concepto']; ?>&est=<?php $accion = ''; if ($row['vch_cateestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>" class="btn btn-info" id="btnUpdate"><?php echo $accion; ?></a>
                             </div>
                             </center>

@@ -5,7 +5,7 @@
 	
 	$actividad = $_GET["id"];
 	$estado	   = $_GET["est"];
-	$accion = '';
+	$accion	   = '';
 	if ($estado > 0) {
 		$accion = 'A';
 	} else {
