@@ -3,15 +3,9 @@
 
     $path = "../../";
     include_once("../../class/library.class.php");
-<<<<<<< HEAD
-    include_once("../../class/setting.class.php");
-    $lib = new Library($path);
-    $setting = new Setting();
-=======
 
     $lib = new Library($path);
 
->>>>>>> origin/master
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -21,7 +15,7 @@
     }
 
     $idUsuario = $sesion->obtener('idUsuario');
-    $nombreModulo = 'Actividad';
+    $nombreModulo = 'Anuncio';
 
     $dirModulos = $lib->getDirectory('dir_module');
     $dirUpload  = $lib->getDirectory('dir_upload');
@@ -33,19 +27,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<<<<<<< HEAD
-    <title><?php echo $setting->getTitle(); ?></title>
-=======
     <title>.- GESTEC OTB -.</title>
->>>>>>> origin/master
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
 
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap1"); ?>">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap2"); ?>">
-     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable1"); ?>">
+    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable1"); ?>">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable2"); ?>">
+    <link rel="stylesheet" href="../../css/datepicker.css" type="text/css">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_style"); ?>">
 
     <script src="<?php echo $lib->getJS("lib_jquery"); ?>" type="text/javascript"></script>
@@ -70,10 +61,6 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
-<<<<<<< HEAD
-        $nameRol  = $sesion->obtener("nombreRol");
-=======
->>>>>>> origin/master
         include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -82,46 +69,60 @@
 <div class="container-fluid contenedor">
     <div class="row">
         <div class="col-xs-8 contenido" id="central">
-<<<<<<< HEAD
-
-=======
 			
->>>>>>> origin/master
             <center>
 			<div id="contenidoCRUD">
-
-            <?php
-                include_once("../../class/dbmanager.class.php");
-                $db = ManagerBDPostgres::getInstanceBDPostgres();
-<<<<<<< HEAD
-
-                $id = $_GET['id'];
-
-=======
-                
-                $id = $_GET['id'];
-                
->>>>>>> origin/master
-                $sqlActividad = $db->executeQuerySQL("SELECT * FROM conceptomovimiento WHERE pk_concepto=$id;");
-                $row = $db->query_Fetch_Array($sqlActividad);
-            ?>
-
-			<form accept-charset="UTF-8" role="form" method="POST" action="update.php">
+			<form accept-charset="UTF-8" role="form" method="POST" action="registrarAnuncio.php">
                 <fieldset>
                     <div class="form-group">
-                        <h2>Actualizar Actividad</h2>
+                        <h2>Nuevo Anuncio</h2>
+                    </div>
+					<input class="form-control" name="idUsuario" id="idUsuario" type="hidden" value="<?php echo $idUsuario;?>">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Nombre anuncio" name="nombreAnuncio" id="nombreAnuncio" type="text" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" placeholder="nombre actividad" name="actividad" id="actividad" type="text" value="<?php echo $row['vch_catenombre']; ?>" required>
+                         <textarea class="form-control" placeholder="Descripcion" name="descripcionAnuncio" id="descripcionAnuncio" required style="height: 165px"></textarea>
                     </div>
+					<div class="form-group">
+
+
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+					<input class="form-control" type="text" value="" placeholder="Fecha Inicio" name="fechaInicio" id="fechaInicio" required>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+		
+		        <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+					<input class="form-control" type="text" value="" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+			 <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker2').datetimepicker();
+            });
+        </script>
+					<div class="form-group">
+						<select name="estadoAnuncio" class="form-control" required>
+							<option value="">Select...</option>
+							<option value="A">Activo</option>
+							<option value="I">Inactivo</option>
+						</select>
+					</div>
                     <div class="form-group">
-                        <select class="form-control" placeholder="tipo concepto" name="tipo" id="tipo">
-                            <option value="I" <?php if ($row['vch_tipoconcepto'] == 'I') echo "selected"; ?>>Ingreso</option>
-                            <option value="E" <?php if ($row['vch_tipoconcepto'] == 'E') echo "selected"; ?>>Egreso</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" value="<?php echo $row[pk_concepto]; ?>" id="idactividad" name="idactividad" />
                         <input class="btn btn-lg btn-success btn-block" type="submit" value="Aceptar">
                         <a class="btn btn-lg btn-primary btn-block" href="index.php">Volver</a>
                     </div>
@@ -136,8 +137,6 @@
         </div>
     </div>
 </div>
-
-
 <footer id="footer" class="panel-footer">
     <?php include_once("../../system/footer.php"); ?>
 </footer><!--/#footer-->
