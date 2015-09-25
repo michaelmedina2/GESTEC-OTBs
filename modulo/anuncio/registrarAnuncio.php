@@ -10,5 +10,5 @@
 	$estado = $_POST['estadoAnuncio'];
 
 	$sqlRol = $db->executeQuerySQL("INSERT INTO anuncio VALUES(default, '$idUsuario', '$titulo', '$descripcion', '', '$fecha_inicio', '$fecha_fin', '$estado')");
-	//header("location: index.php");
+	header("location: index.php");
 ?>

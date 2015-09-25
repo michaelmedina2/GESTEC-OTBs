@@ -13,7 +13,6 @@
 	if($sesion->iniciado() == 0) {
 		header('location: ' . $path . 'index.php');
 	}
-	
 	$idUsuario = $sesion->obtener('idUsuario');
 	$nombreModulo = 'Anuncio';
 	

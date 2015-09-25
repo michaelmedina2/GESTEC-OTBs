@@ -45,8 +45,8 @@
     <script src="<?php echo $lib->getJS("lib_dataTables2"); ?>" type="text/javascript"></script>
     <script src="<?php echo $lib->getJS("lib_dataTables3"); ?>" type="text/javascript"></script>
     <script src="<?php echo $lib->getJS("lib_jscript"); ?>" type="text/javascript"></script>
-
 </head>
+
 <body>
 
 <header id="header">
