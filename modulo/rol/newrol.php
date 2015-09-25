@@ -81,7 +81,7 @@
                         <input class="form-control" placeholder="nombre rol" name="nombre" id="nombre" type="text" required>
                     </div>
 
-					<div class="table-responsive ">
+					<div class="table-responsive hidden">
                     <span>Privilegios</span>
                     <table class="table table-condensed">
                     <thead>
