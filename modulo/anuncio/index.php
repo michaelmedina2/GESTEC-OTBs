@@ -1,24 +1,24 @@
 <?php
 	session_start();
-	
+
 	$path = "../../";
 	include_once("../../class/library.class.php");
-	
+    include_once("../../class/setting.class.php");
 	$lib = new Library($path);
-	
+    $setting = new Setting();
 	include_once("../../class/sesion.class.php");
-		
+
 	$sesion = Sesion::getInstance();
-	
+
 	if($sesion->iniciado() == 0) {
 		header('location: ' . $path . 'index.php');
 	}
-	
+
 	$idUsuario = $sesion->obtener('idUsuario');
 	$nombreModulo = 'Anuncio';
-	
+
 	$dirModulos = $lib->getDirectory('dir_module');
-	$dirUpload  = $lib->getDirectory('dir_upload');	
+	$dirUpload  = $lib->getDirectory('dir_upload');
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.- GESTEC OTB -.</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -57,9 +57,10 @@
 
 <nav class="navbar navbar-inverse">
      <?php
-        $menuItem = 'Anuncio';        
+        $menuItem = 'Anuncio';
         $idRol    = $sesion->obtener('idRol');
-		$nameUser = $sesion->obtener("nombreUsuario");  
+		$nameUser = $sesion->obtener("nombreUsuario");
+        $nameRol  = $sesion->obtener("nombreRol");
 		include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -68,9 +69,9 @@
 <div class="container-fluid contenedor">
 	<div class="row">
     	<div class="col-xs-8 contenido" id="central">
-    		
+
             <img src="../../img/enconstruccion.jpg" class="img-thumbnail" width="100%">
-            
+
         </div>
         <div class="col-xs-4 sidebar" id="noticia">
       		<?php include_once("../../system/side.php"); ?>

@@ -1,14 +1,14 @@
 <?php
 	session_start();
-	
+  include_once ('class/setting.class.php');
 	include_once("class/library.class.php");
-	
+
 	$librerias = new Library();
-	
+  $setting = new Setting();
 	include_once("class/sesion.class.php");
-	
+
 	$sesion = Sesion::getInstance();
-	
+
 	if($sesion->iniciado() == TRUE)
 	{
 		header('location: ' . $librerias->getDirectory('dir_module') . "inicio/index.php");
@@ -21,9 +21,9 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Acceso</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
-	<link rel="icon" href="gotb2.png">
+	  <link rel="icon" href="gotb2.png">
 
     <link rel="stylesheet" href="<?php echo $librerias->getCSS("css_bootstrap1"); ?>">
     <link rel="stylesheet" href="<?php echo $librerias->getCSS("css_bootstrap2"); ?>">
@@ -44,7 +44,7 @@
 	<div class="row">
     	<div class="col-md-4 col-md-offset-4">
         	<center>
-        	<img src="img/logoLogin.png" height="110">
+        	<img src="<?php echo $setting->getLogoLogin(); ?>" height="110">
             </center>
         	<div class="panel panel-default">
                 <div class="panel-heading">

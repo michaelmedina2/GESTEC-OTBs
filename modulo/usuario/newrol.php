@@ -1,11 +1,11 @@
 <?php
     session_start();
-
+	
     $path = "../../";
     include_once("../../class/library.class.php");
-    include_once("../../class/setting.class.php");
+	include_once("../../class/setting.class.php");
     $lib = new Library($path);
-    $setting = new Setting();
+	$setting = new Setting();
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -15,7 +15,7 @@
     }
 
     $idUsuario = $sesion->obtener('idUsuario');
-    $nombreModulo = 'Rol';
+    $nombreModulo = 'Usuario';
 
     $dirModulos = $lib->getDirectory('dir_module');
     $dirUpload  = $lib->getDirectory('dir_upload');
@@ -60,7 +60,7 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
-        $nameRol  = $sesion->obtener("nombreRol");
+		$nameRol  = $sesion->obtener('nombreRol');
         include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -81,7 +81,7 @@
                         <input class="form-control" placeholder="nombre rol" name="nombre" id="nombre" type="text" required>
                     </div>
 
-					<div class="table-responsive ">
+					<div class="table-responsive hidden">
                     <span>Privilegios</span>
                     <table class="table table-condensed">
                     <thead>

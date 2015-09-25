@@ -1,13 +1,13 @@
 <?php
 	session_start();
-
+	
 	$path = "../../";
 	include_once("../../class/library.class.php");
-    include_once("../../class/setting.class.php");
+	include_once("../../class/setting.class.php");
 	$lib = new Library($path);
-    $setting = new Setting();
+	$setting = new Setting();
 	include_once("../../class/sesion.class.php");
-
+	
 	$sesion = Sesion::getInstance();
 
 	if($sesion->iniciado() == 0) {
@@ -15,7 +15,7 @@
 	}
 
 	$idUsuario = $sesion->obtener('idUsuario');
-	$nombreModulo = 'Rol';
+	$nombreModulo = 'Usuario';
 
 	$dirModulos = $lib->getDirectory('dir_module');
 	$dirUpload  = $lib->getDirectory('dir_upload');
@@ -60,7 +60,7 @@
 
         $idRol    = $sesion->obtener('idRol');
 		$nameUser = $sesion->obtener("nombreUsuario");
-        $nameRol  = $sesion->obtener("nombreRol");
+		$nameRol  = $sesion->obtener('nombreRol');
 		include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -74,30 +74,49 @@
             <a href="newrol.php" class="btn btn-primary" id="btnNew">Nuevo</a>
             <center>
 
-            <caption> <h1>Gesti&oacute;n de Roles</h1></caption>
+            <caption> <h1>Gesti&oacute;n de Usuarios</h1></caption>
             <table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>Nombre Rol</th>
+                        <th>Tipo Usuario</th>
+                        <th>CI</th>
+                        <th>Nombre</th>
+                        <td>Sexo</td>
+                        <th>Foto</th>
                         <th>Estado</th>
                         <th>Control</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        $sqlRol = $db->executeQuerySQL("select * from rol");
+                        $sqlUser = $db->executeQuerySQL("select * from usuario where vch_usuatipousuario <> 'otb'");
 
-                        while($row=$db->query_Fetch_Array($sqlRol))
+                        while($row=$db->query_Fetch_Array($sqlUser))
                         {
                     ?>
                     <tr>
-                        <td><?php echo $row[vch_rolnombre]; ?></td>
-                        <td><center><?php if ($row[vch_rolestado] == 'A') { echo "Activo"; } if ($row[vch_rolestado] == 'I') { echo "Inactivo"; } ?></center></td>
+                        <td><?php echo $row[vch_usuatipousuario]; ?></td>
+                        <td><?php echo $row[vch_usuaci]; ?></td>
+                        <td><?php echo $row[vch_usuanombre]." ".$row[vch_usuaapp]." ".$row[vch_usuaapm]; ?></td>
+                        <td>
+                        <center>
+						<?php 
+							if($row[vch_usuasexo]=="F")
+							{
+								echo '<img src="../../img/femenino.png" width="20px" class="img-rounded">';
+							}else{
+								echo '<img src="../../img/masculino.png" width="25px" class="img-rounded">';
+							}							
+						?>
+                        </center>
+                        </td>
+                        <td><center><img src="<?php echo $row[vch_usuafoto]; ?>" width="30px"></center></td>
+                        <td><center><?php if ($row[vch_usuaestado] == 'A') { echo "Activo"; } if ($row[vch_usuaestado] == 'I') { echo "Inactivo"; } ?></center></td>
                         <td>
                             <center>
                             <div class="btn-group btn-group-xs">
-                              <a href="updaterol.php?id=<?php echo $row[pk_rol]; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
-                              <a href="delete.php?id=<?php echo $row[pk_rol]; ?>&est=<?php $accion = ''; if ($row['vch_rolestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>" class="btn btn-info" id="btnUpdate"><?php echo $accion; ?></a>
+                              <a href="updaterol.php?id=<?php echo $row[pk_usuario]; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
+                              <a href="delete.php?id=<?php echo $row[pk_usuario]; ?>&est=<?php $accion = ''; if ($row['vch_usuaestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>" class="btn btn-info" id="btnUpdate"><?php echo $accion; ?></a>
                             </div>
                             </div>
                             </center>

@@ -43,7 +43,7 @@ class Library
         $this->js['lib_dataTables1'] = $directoryJS . 'jquery.dataTables.min.js';
         $this->js['lib_dataTables2'] = $directoryJS . 'dataTables.bootstrap.min.js';
 		$this->js['lib_dataTables3'] = $directoryJS . 'dataTables.responsive.min.js';
-		$this->js['lib_jqueryui']    = $directoryJS . 'jquery-ui.js';        
+		$this->js['lib_jqueryui']    = $directoryJS . 'jquery-ui.js';
 		$this->js['lib_jvalidate']   = $directoryJS . 'jquery.validate.js';
 		$this->js['lib_jscript']     = $directoryJS . 'script.js';
 	}
@@ -51,7 +51,7 @@ class Library
     private function loadStylus()
     {
         $directoryCSS = $this->getDirectory('dir_theme');
-		
+
 		$this->css['css_bootstrap1'] = $directoryCSS . 'bootstrap.min.css';
 		$this->css['css_bootstrap2'] = $directoryCSS . 'bootstrap-theme.min.css';
 		$this->css['css_dataTable1'] = $directoryCSS . 'dataTables.bootstrap.min.css';
@@ -63,7 +63,7 @@ class Library
     private function loadClass()
     {
         $directoryClassPHP = $this->getDirectory('dir_class');
-		
+
 		$this->class['class_login']     = $directoryClassPHP . 'login.class.php';
         $this->class['class_Session']   = $directoryClassPHP . 'sesion.class.php';
         $this->class['class_DBManager'] = $directoryClassPHP . 'dbmanager.class.php'; #manejador para postgres
@@ -71,37 +71,37 @@ class Library
 		$this->class['class_FPDF']      = $directoryClassPHP . 'fpdf/fpdf.php';
     }
 
-    public function getDirectory($nameDirectory) 
+    public function getDirectory($nameDirectory)
 	{
         $pathDirectory = $this->directory[$nameDirectory];
-        if($pathDirectory == '') 
+        if($pathDirectory == '')
 		{
             $pathDirectory = $this->path;
         }
         return $pathDirectory;
     }
 
-    public function getJS($nameLibraryJS) 
+    public function getJS($nameLibraryJS)
 	{
         $pathJS = $this->js[$nameLibraryJS];
-        if($pathJS == '') 
+        if($pathJS == '')
 		{
             $pathJS = $this->path;
         }
         return $pathJS;
     }
 
-    public function getCSS($nameCSS) 
+    public function getCSS($nameCSS)
 	{
         $pathCSS = $this->css[$nameCSS];
-        if($pathCSS == '') 
+        if($pathCSS == '')
 		{
             $pathCSS = $this->path;
         }
         return $pathCSS;
     }
 
-    public function getClass($nameClass) 
+    public function getClass($nameClass)
 	{
         $pathClass = $this->class[$nameClass];
         if($pathClass == '')

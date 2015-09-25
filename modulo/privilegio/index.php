@@ -3,9 +3,9 @@
 
 	$path = "../../";
 	include_once("../../class/library.class.php");
-
-	$lib = new Library($path);
-
+    include_once("../../class/setting.class.php");
+    $lib = new Library($path);
+    $setting = new Setting();
 	include_once("../../class/sesion.class.php");
 
 	$sesion = Sesion::getInstance();
@@ -13,13 +13,13 @@
 	if($sesion->iniciado() == 0) {
 		header('location: ' . $path . 'index.php');
 	}
-	
+
 	if(isset($_GET['id'])) {
 		header('location: editar.php?id=' . $_GET['id']);
 	}
 
 	$idUsuario = $sesion->obtener('idUsuario');
-	
+
 	$nombreModulo = 'Privilegio';
 
 	$dirModulos = $lib->getDirectory('dir_module');
@@ -32,7 +32,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.- GESTEC OTB -.</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -65,9 +65,10 @@
 
 <nav class="navbar navbar-inverse">
      <?php
-        
+
         $idRol    = $sesion->obtener('idRol');
 		$nameUser = $sesion->obtener("nombreUsuario");
+        $nameRol  = $sesion->obtener("nombreRol");
 		include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -76,24 +77,24 @@
 <div class="container-fluid contenedor">
 	<div class="row">
     	<div class="col-xs-8 contenido" id="central">
-    		
-            
+
+
             <div id="div-content">
             <div id="div-middle-content">
                 <div class="div-panel div-panel-gray">
                     <span class="titulo titulo-h1">Privilegios</span>
                  <div id="roles-tabs">
-        
+
             <ul>
             <?php
 				include_once("../../class/dbmanager.class.php");
-            	
+
 				$db = ManagerBDPostgres::getInstanceBDPostgres();
-				
+
 				$sqlRol  = $db->executeQuerySQL("SELECT * FROM rol WHERE vch_rolestado='A'");
                 $numRows = $db->query_Num_Rows($sqlRol);
                 $listaIDRoles = array();
-				
+
                 for($i=0 ; $i < $numRows ; $i++)
 				{
 					$row   = $db->query_Fetch_Array($sqlRol);
@@ -106,7 +107,7 @@
             </ul>
             <?php
             	$size = count($listaIDRoles);
-                for($i=0 ; $i < $size ; $i++) 
+                for($i=0 ; $i < $size ; $i++)
 				{
                 	$rolId = $listaIDRoles[$i];
                     include 'lista.php';
@@ -116,7 +117,7 @@
             </div>
             </div>
             </div>
-            
+
         </div>
         <div class="col-xs-4 sidebar" id="noticia">
       		<?php include_once("../../system/side.php"); ?>

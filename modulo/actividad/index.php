@@ -3,9 +3,9 @@
 
 	$path = "../../";
 	include_once("../../class/library.class.php");
-
+    include_once("../../class/setting.class.php");
 	$lib = new Library($path);
-
+    $setting = new Setting();
 	include_once("../../class/sesion.class.php");
 
 	$sesion = Sesion::getInstance();
@@ -27,7 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.- GESTEC OTB -.</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -57,9 +57,10 @@
 
 <nav class="navbar navbar-inverse">
      <?php
-        
+
         $idRol    = $sesion->obtener('idRol');
 		$nameUser = $sesion->obtener("nombreUsuario");
+        $nameRol  = $sesion->obtener("nombreRol");
 		include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -68,13 +69,13 @@
 <div class="container-fluid contenedor">
 	<div class="row">
     	<div class="col-xs-8 contenido" id="central">
-    		
-            
+
+
             <a href="new.php" class="btn btn-primary" id="btnNew">Nueva</a>
             <center>
-            
+
             <caption> <h1>Gesti&oacute;n de Actividades</h1></caption>
-            <table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">	       
+            <table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Actividad</th>
@@ -83,11 +84,11 @@
                         <th>Control</th>
                     </tr>
                 </thead>
-                <tbody> 
+                <tbody>
                     <?php
                         $sqlActividad = $db->executeQuerySQL("SELECT * FROM conceptomovimiento ORDER BY vch_catenombre;");
                         while ($row = $db->query_Fetch_Array($sqlActividad)) {
-                    ?>      	
+                    ?>
                     <tr>
                         <td><?php echo $row['vch_catenombre']; ?></td>
                         <td><center><?php if ($row['vch_tipoconcepto'] == 'I') { echo "Ingreso"; } if ($row['vch_tipoconcepto'] == 'E') { echo "Egreso"; } ?></center></td>
@@ -95,20 +96,20 @@
                         <td>
                             <center>
                             <div class="btn-group btn-group-xs">
-                              <a href="viewactivity.php?id=<?php echo $row['pk_concepto']; ?>" class="btn btn-success btnView">Vista</a>
-                              <a href="updateactivity.php?id=<?php echo $row['pk_concepto']; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
+                              <!--<a href="viewactivity.php?id=<?php //echo $row['pk_concepto']; ?>" class="btn btn-success btnView">Vista</a>-->
+                              <a href="modify.php?id=<?php echo $row['pk_concepto']; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
                               <a href="activate.php?id=<?php echo $row['pk_concepto']; ?>&est=<?php $accion = ''; if ($row['vch_cateestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>" class="btn btn-info" id="btnUpdate"><?php echo $accion; ?></a>
                             </div>
                             </center>
                         </td>
-                    </tr>                 
+                    </tr>
                     <?php
                         }
                     ?>
                 </tbody>
             </table>
             </center>
-            
+
         </div>
         <div class="col-xs-4 sidebar" id="noticia">
       		<?php include_once("../../system/side.php"); ?>

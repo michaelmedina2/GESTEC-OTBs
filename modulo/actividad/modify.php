@@ -2,7 +2,7 @@
     session_start();
 
     $path = "../../";
-   include_once("../../class/library.class.php");
+    include_once("../../class/library.class.php");
     include_once("../../class/setting.class.php");
     $lib = new Library($path);
     $setting = new Setting();
@@ -15,7 +15,7 @@
     }
 
     $idUsuario = $sesion->obtener('idUsuario');
-    $nombreModulo = 'Rol';
+    $nombreModulo = 'Actividad';
 
     $dirModulos = $lib->getDirectory('dir_module');
     $dirUpload  = $lib->getDirectory('dir_upload');
@@ -72,35 +72,39 @@
 
             <center>
 			<div id="contenidoCRUD">
-			<?php
+
+            <?php
                 include_once("../../class/dbmanager.class.php");
                 $db = ManagerBDPostgres::getInstanceBDPostgres();
 
                 $id = $_GET['id'];
 
-                $sqlRol = $db->executeQuerySQL("select * from rol where pk_rol='$id'");
-                $row = $db->query_Fetch_Array($sqlRol);
+                $sqlActividad = $db->executeQuerySQL("SELECT * FROM conceptomovimiento WHERE pk_concepto=$id;");
+                $row = $db->query_Fetch_Array($sqlActividad);
             ?>
 
-            <form accept-charset="UTF-8" role="form" method="POST" action="update.php">
+			<form accept-charset="UTF-8" role="form" method="POST" action="update.php">
                 <fieldset>
                     <div class="form-group">
-                        <h2>Actualizar Rol</h2>
+                        <h2>Actualizar Actividad</h2>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" placeholder="nombre rol" name="nombre" id="nombre" type="text" value="<?php echo $row[vch_rolnombre]; ?>" required>
+                        <input class="form-control" placeholder="nombre actividad" name="actividad" id="actividad" type="text" value="<?php echo $row['vch_catenombre']; ?>" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" placeholder="estado rol" name="estado" id="estado" type="text" value="<?php echo $row[vch_rolestado]; ?>" required>
+                        <select class="form-control" placeholder="tipo concepto" name="tipo" id="tipo">
+                            <option value="I" <?php if ($row['vch_tipoconcepto'] == 'I') echo "selected"; ?>>Ingreso</option>
+                            <option value="E" <?php if ($row['vch_tipoconcepto'] == 'E') echo "selected"; ?>>Egreso</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <input type="hidden" value="<?php echo $row[pk_rol]; ?>" id="idrol" name="idrol" />
+                        <input type="hidden" value="<?php echo $row[pk_concepto]; ?>" id="idactividad" name="idactividad" />
                         <input class="btn btn-lg btn-success btn-block" type="submit" value="Aceptar">
                         <a class="btn btn-lg btn-primary btn-block" href="index.php">Volver</a>
                     </div>
                 </fieldset>
             </form>
-            </div>
+			</div>
 			</center>
 
         </div>
