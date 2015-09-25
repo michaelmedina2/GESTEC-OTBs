@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap2"); ?>">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable1"); ?>">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable2"); ?>">
-    <link rel="stylesheet" href="../../css/datepicker.css" type="text/css">
+    <link rel="stylesheet" href="../../css/bootstrap-datetimepicker.min.css" type="text/css" media="screen">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_style"); ?>">
 
     <script src="<?php echo $lib->getJS("lib_jquery"); ?>" type="text/javascript"></script>
@@ -87,34 +87,26 @@
 					<div class="form-group">
 
 
+        <div class="form-group">
             <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-					<input class="form-control" type="text" value="" placeholder="Fecha Inicio" name="fechaInicio" id="fechaInicio" required>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+				<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" type="text" value="" placeholder="Fecha Inicio"  name="fechaInicio" id="fechaInicio" required readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
-            </div>
-
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
+				<input class="form-control" type="hidden" id="dtp_input1" name="dtp_input1" value="" /><br/>
+			</div>
+        </div>	
 		
-		        <div class="form-group">
-                <div class='input-group date' id='datetimepicker2'>
-					<input class="form-control" type="text" value="" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
+		<div class="form-group">
+			<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" type="text" value="" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
-			 <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker2').datetimepicker();
-            });
-        </script>
+				<input class="form-control" type="hidden" id="dtp_input2" name="dtp_input2" value="" /><br/>
+		</div>
+		
 					<div class="form-group">
 						<select name="estadoAnuncio" class="form-control" required>
 							<option value="">Select...</option>
@@ -140,6 +132,24 @@
 <footer id="footer" class="panel-footer">
     <?php include_once("../../system/footer.php"); ?>
 </footer><!--/#footer-->
+
+
+<script type="text/javascript" src="../../js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../js/locales/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	$('.form_date').datetimepicker({
+        language:  'es',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+</script>
+
+
 
 </body>
 </html>
