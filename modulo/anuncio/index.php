@@ -3,8 +3,10 @@
 	
 	$path = "../../";
 	include_once("../../class/library.class.php");
-	
+	include_once("../../class/setting.class.php");
+		
 	$lib = new Library($path);
+	$setting = new Setting();
 	
 	include_once("../../class/sesion.class.php");
 		
@@ -26,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.- GESTEC OTB -.</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -58,7 +60,8 @@
      <?php
         $menuItem = 'Anuncio';        
         $idRol    = $sesion->obtener('idRol');
-		$nameUser = $sesion->obtener("nombreUsuario");  
+		$nameUser = $sesion->obtener("nombreUsuario"); 
+        $nameRol  = $sesion->obtener("nombreRol");		
 		include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->

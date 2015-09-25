@@ -3,8 +3,10 @@
 
     $path = "../../";
     include_once("../../class/library.class.php");
+	include_once("../../class/setting.class.php");
 
     $lib = new Library($path);
+	$setting = new Setting();
 
     include_once("../../class/sesion.class.php");
 
@@ -13,7 +15,6 @@
     if($sesion->iniciado() == 0) {
         header('location: ' . $path . 'index.php');
     }
-
     $idUsuario = $sesion->obtener('idUsuario');
     $nombreModulo = 'Anuncio';
 
@@ -27,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.- GESTEC OTB -.</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -61,9 +62,9 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
+		$nameRol  = $sesion->obtener("nombreRol");	
         include_once("../../system/menu.php");
-		
-			#==================================================
+
 	include_once("../../class/dbmanager.class.php");
                 $db = ManagerBDPostgres::getInstanceBDPostgres();
                 
