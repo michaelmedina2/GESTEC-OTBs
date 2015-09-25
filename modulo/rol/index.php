@@ -71,7 +71,7 @@
     	<div class="col-xs-8 contenido" id="central">
 
 
-            <a href="newrol.php" class="btn btn-primary" id="btnNew">Nuevo</a>
+            <a href="newrol.php" class="btn btn-primary" id="btnNew">A&ntildeadir Rol</a>
             <center>
 
             <caption> <h1>Gesti&oacute;n de Roles</h1></caption>
