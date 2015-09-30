@@ -3,9 +3,9 @@
 
     $path = "../../";
     include_once("../../class/library.class.php");
-
+    include_once("../../class/setting.class.php");
     $lib = new Library($path);
-
+    $setting = new Setting();
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -27,7 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.- GESTEC OTB -.</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -60,6 +60,7 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
+        $nameRol  = $sesion->obtener("nombreRol");
         include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -68,9 +69,9 @@
 <div class="container-fluid contenedor">
     <div class="row">
         <div class="col-xs-8 contenido" id="central">
-			
+
             <center>
-			<div id="contenidoCRUD">
+			<div class="col-md-4 col-md-offset-4">
 			<form accept-charset="UTF-8" role="form" method="POST" action="new.php">
                 <fieldset>
                     <div class="form-group">
@@ -79,9 +80,64 @@
                     <div class="form-group">
                         <input class="form-control" placeholder="nombre rol" name="nombre" id="nombre" type="text" required>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="estado rol" name="estado" id="estado" type="text" required>
-                    </div>
+
+					<div class="table-responsive hidden">
+                    <span>Privilegios</span>
+                    <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Modulo</th>
+                            <th>Privilegio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						<?php
+						include_once("../../class/dbmanager.class.php");
+
+						$db = ManagerBDPostgres::getInstanceBDPostgres();
+
+						$sqlPriv  = $db->executeQuerySQL("SELECT * FROM privilegio");
+
+                        $id = 0;
+                        while($fila = $db->query_Fetch_Array($sqlPriv))
+						{
+                            $id = $id + 1;
+                            $nombrePrivilegio        = $fila[vch_privnombre];
+                            $privilegioAdministrador = $fila[bol_privadmin];
+                            $privilegioCliente       = $fila[bol_privcliente];
+                        ?>
+                        <tr>
+                            <td><?php echo "$nombrePrivilegio"; ?></td>
+                            <td class="radio">
+                                <?php
+                                    if ($privilegioAdministrador == 1) {
+                                        echo "<input type='radio' id='radio-admin-$id' name='radio-$id' value='1' />";
+                                        echo "<label for='radio-admin-$id'>Administrador</label>";
+                                    }
+                                    else {
+                                        echo "<input type='radio' id='radio-admin-$id' name='radio-$id' value='1' disabled='disabled' />";
+                                        echo "<label for='radio-admin-$id'>Administrador</label>";
+                                    }
+                                    if ($privilegioCliente == 1) {
+                                        echo "<input type='radio' id='radio-client-$id' name='radio-$id' value='2' />";
+                                        echo "<label for='radio-client-$id'>Cliente</label>";
+                                    }
+                                    else {
+                                        echo "<input type='radio' id='radio-client-$id' name='radio-$id' value='2' disabled='disabled' />";
+                                        echo "<label for='radio-client-$id'>Cliente</label>";
+                                    }
+                                    echo "<input type='radio' id='radio-none-$id' name='radio-$id' value='0' checked='checked' />";
+                                    echo "<label for='radio-none-$id'>Ninguno</label>";
+                                ?>
+                            </td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                    </table>
+					</div>
+
                     <div class="form-group">
                         <input class="btn btn-lg btn-success btn-block" type="submit" value="Aceptar">
                         <a class="btn btn-lg btn-primary btn-block" href="index.php">Volver</a>

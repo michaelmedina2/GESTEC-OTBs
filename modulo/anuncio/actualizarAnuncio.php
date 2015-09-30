@@ -3,9 +3,9 @@
 
     $path = "../../";
     include_once("../../class/library.class.php");
-
+    include_once("../../class/setting.class.php");
     $lib = new Library($path);
-
+    $setting = new Setting();
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -27,7 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.- GESTEC OTB -.</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap2"); ?>">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable1"); ?>">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable2"); ?>">
-    <link rel="stylesheet" href="../../css/datepicker.css" type="text/css">
+    <link rel="stylesheet" href="../../css/bootstrap-datetimepicker.min.css" type="text/css" media="screen">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_style"); ?>">
 
     <script src="<?php echo $lib->getJS("lib_jquery"); ?>" type="text/javascript"></script>
@@ -61,14 +61,15 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
+        $nameRol  = $sesion->obtener("nombreRol");
         include_once("../../system/menu.php");
-		
+
 			#==================================================
 	include_once("../../class/dbmanager.class.php");
                 $db = ManagerBDPostgres::getInstanceBDPostgres();
-                
+
                 $id = $_GET['id'];
-                
+
                 $sqlAnuncio = $db->executeQuerySQL("select * from anuncio where pk_anuncio='$id'");
                 $row = $db->query_Fetch_Array($sqlAnuncio);
     ?>
@@ -78,7 +79,7 @@
 <div class="container-fluid contenedor">
     <div class="row">
         <div class="col-xs-8 contenido" id="central">
-			
+
             <center>
 			<div id="contenidoCRUD">
 			<form accept-charset="UTF-8" role="form" method="POST" action="registrarAnuncioActualizado.php">
@@ -98,38 +99,32 @@
 
 
             <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-					<input class="form-control" type="text" value="<?php echo $row[dtt_anunfechainicio]; ?>" placeholder="Fecha Inicio" name="fechaInicio" id="fechaInicio" required>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
+				<div class="form-group">
+					<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+						<input class="form-control" type="text" value="<?php echo $row[dtt_anunfechainicio]; ?>" placeholder="Fecha Inicio"  name="fechaInicio" id="fechaInicio" required readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+					<input class="form-control" type="hidden" id="dtp_input1" name="dtp_input1" value="<?php echo $row[dtt_anunfechainicio]; ?>" /><br/>
+				</div>
+			</div>
 
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
-		
-		        <div class="form-group">
-                <div class='input-group date' id='datetimepicker2'>
-					<input class="form-control" type="text" value="<?php echo $row[dtt_anunfechafin]; ?>" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-			 <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker2').datetimepicker();
-            });
-        </script>
+			<div class="form-group">
+				<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<input class="form-control" type="text" value="<?php echo $row[dtt_anunfechafin]; ?>" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required readonly>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				</div>
+					<input class="form-control" type="hidden" id="dtp_input2" name="dtp_input2" value="<?php echo $row[dtt_anunfechafin]; ?>" /><br/>
+			</div>
+
+
+
 					<div class="form-group">
 						<select name="estadoAnuncio" class="form-control" required>
 						<?php $vch_anunestado = '';
-						if ($row[vch_anunestado] == 'A') { $anunestado = "Activo"; } 
-						if ($row[vch_anunestado] == 'I') { $anunestado = "Inactivo"; } 
+						if ($row[vch_anunestado] == 'A') { $anunestado = "Activo"; }
+						if ($row[vch_anunestado] == 'I') { $anunestado = "Inactivo"; }
 						?>
 							<option value="<?php echo substr($anunestado,0,1);?>"><?php echo $anunestado; ?></option>
 							<option value="A">Activo</option>
@@ -154,6 +149,21 @@
 <footer id="footer" class="panel-footer">
     <?php include_once("../../system/footer.php"); ?>
 </footer><!--/#footer-->
+
+<script type="text/javascript" src="../../js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../js/locales/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	$('.form_date').datetimepicker({
+        language:  'es',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+</script>
 
 </body>
 </html>

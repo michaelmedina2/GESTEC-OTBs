@@ -4,7 +4,7 @@
 	$path = "../../";
 	include_once("../../class/library.class.php");
     include_once("../../class/setting.class.php");
-    $lib = new Library($path);
+	$lib = new Library($path);
     $setting = new Setting();
 	include_once("../../class/sesion.class.php");
 
@@ -14,13 +14,8 @@
 		header('location: ' . $path . 'index.php');
 	}
 
-	if(isset($_GET['id'])) {
-		header('location: editar.php?id=' . $_GET['id']);
-	}
-
 	$idUsuario = $sesion->obtener('idUsuario');
-
-	$nombreModulo = 'Privilegio';
+	$nombreModulo = 'Anuncio';
 
 	$dirModulos = $lib->getDirectory('dir_module');
 	$dirUpload  = $lib->getDirectory('dir_upload');
@@ -41,7 +36,6 @@
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_bootstrap2"); ?>">
  	<link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable1"); ?>">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_dataTable2"); ?>">
-    <link rel="stylesheet" href="<?php echo $lib->getCSS("css_jqueryui"); ?>">
     <link rel="stylesheet" href="<?php echo $lib->getCSS("css_style"); ?>">
 
     <script src="<?php echo $lib->getJS("lib_jquery"); ?>" type="text/javascript"></script>
@@ -49,11 +43,9 @@
     <script src="<?php echo $lib->getJS("lib_dataTables1"); ?>" type="text/javascript"></script>
     <script src="<?php echo $lib->getJS("lib_dataTables2"); ?>" type="text/javascript"></script>
     <script src="<?php echo $lib->getJS("lib_dataTables3"); ?>" type="text/javascript"></script>
-    <script src="<?php echo $lib->getJS("lib_jqueryui"); ?>" type="text/javascript"></script>
 	<script src="<?php echo $lib->getJS("lib_jscript"); ?>" type="text/javascript"></script>
 
 </head>
-
 <body>
 
 <header id="header">
@@ -65,7 +57,7 @@
 
 <nav class="navbar navbar-inverse">
      <?php
-
+        $menuItem = 'Anuncio';
         $idRol    = $sesion->obtener('idRol');
 		$nameUser = $sesion->obtener("nombreUsuario");
         $nameRol  = $sesion->obtener("nombreRol");
@@ -78,45 +70,7 @@
 	<div class="row">
     	<div class="col-xs-8 contenido" id="central">
 
-
-            <div id="div-content">
-            <div id="div-middle-content">
-                <div class="div-panel div-panel-gray">
-                    <span class="titulo titulo-h1">Privilegios</span>
-                 <div id="roles-tabs">
-
-            <ul>
-            <?php
-				include_once("../../class/dbmanager.class.php");
-
-				$db = ManagerBDPostgres::getInstanceBDPostgres();
-
-				$sqlRol  = $db->executeQuerySQL("SELECT * FROM rol WHERE vch_rolestado='A'");
-                $numRows = $db->query_Num_Rows($sqlRol);
-                $listaIDRoles = array();
-
-                for($i=0 ; $i < $numRows ; $i++)
-				{
-					$row   = $db->query_Fetch_Array($sqlRol);
-                    $rolId = $row[pk_rol];
-                    $rolNombre = $row[vch_rolnombre];
-                    echo "<li><a href='#tab-$rolId'>$rolNombre</a></li>";
-                    $listaIDRoles[] = $rolId;
-                }
-            ?>
-            </ul>
-            <?php
-            	$size = count($listaIDRoles);
-                for($i=0 ; $i < $size ; $i++)
-				{
-                	$rolId = $listaIDRoles[$i];
-                    include 'lista.php';
-                }
-            ?>
-            </div>
-            </div>
-            </div>
-            </div>
+            <img src="../../img/enconstruccion.jpg" class="img-thumbnail" width="100%">
 
         </div>
         <div class="col-xs-4 sidebar" id="noticia">

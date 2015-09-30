@@ -3,9 +3,9 @@
 
     $path = "../../";
     include_once("../../class/library.class.php");
-
+    include_once("../../class/setting.class.php");
     $lib = new Library($path);
-
+    $setting = new Setting();
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -27,7 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.- GESTEC OTB -.</title>
+    <title><?php echo $setting->getTitle(); ?></title>
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -60,6 +60,7 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
+        $nameRol  = $sesion->obtener("nombreRol");
         include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -68,16 +69,16 @@
 <div class="container-fluid contenedor">
     <div class="row">
         <div class="col-xs-8 contenido" id="central">
-			
+
             <center>
 			<div id="contenidoCRUD">
 
             <?php
                 include_once("../../class/dbmanager.class.php");
                 $db = ManagerBDPostgres::getInstanceBDPostgres();
-                
+
                 $id = $_GET['id'];
-                
+
                 $sqlActividad = $db->executeQuerySQL("SELECT * FROM conceptomovimiento WHERE pk_concepto=$id;");
                 $row = $db->query_Fetch_Array($sqlActividad);
             ?>

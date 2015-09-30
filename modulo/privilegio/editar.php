@@ -3,9 +3,10 @@ session_start();
 
 $rutaRaiz = '../../';
 include_once("../../class/library.class.php");
+include_once("../../class/setting.class.php");
 
 $librerias = new Library($rutaRaiz);
-
+$setting   = new Setting();
 include_once($librerias->getClass('class_Sesion'));
 
 $sesion = Sesion::getInstance();
@@ -26,7 +27,7 @@ include_once($librerias->getClase('class_Conexion'));
 
 $conexion = Conexion::getInstance();
 $conexion->conectarse();
-                        
+
 $dirTemas = $librerias->getDirectorio('dir_temas');
 $dirImagenes = $librerias->getDirectorio('dir_imagenes');
 $dirSistema = $librerias->getDirectorio('dir_sistema');
@@ -38,9 +39,9 @@ $nombreModulo = 'Privilegios';
 <html>
     <head>
         <meta charset="UTF-8" />
-        
-        <title>Cambiar Privilegios</title>
-        
+
+        <title><?php echo $setting->getTitle(); ?></title>
+
         <link rel="stylesheet" type="text/css" href="<?php echo $dirTemas . 'main.css'; ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo $dirTemas . 'header.css'; ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo $dirTemas . 'form.css'; ?>" />
@@ -49,43 +50,43 @@ $nombreModulo = 'Privilegios';
         <link rel="stylesheet" type="text/css" href="<?php echo $dirTemas . 'div-content.css'; ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo $dirTemas . 'div-common.css'; ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo $librerias->getCSS('css_jquery_ui'); ?>" />
-        
+
         <style type="text/css">
             table {
                 width: 400px;
                 margin-left: auto;
                 margin-right: auto;
             }
-            
+
             table th {
                 background-color: rgb(230, 230, 230);
                 padding: 5px 0px 5px 0px;
             }
-            
+
             table td {
-                padding: 3px 10px 3px 10px; 
+                padding: 3px 10px 3px 10px;
             }
-            
+
             table .td-privilegios {
                 text-align: center;
             }
-            
+
             #div-middle-content {
                 width: 76%;
             }
 
             #div-right-content {
-                width: 20%;    
+                width: 20%;
             }
         </style>
-        
-        <script src="<?php echo $librerias->getLibreria('lib_jquery'); ?>" type="text/javascript"></script>     
+
+        <script src="<?php echo $librerias->getLibreria('lib_jquery'); ?>" type="text/javascript"></script>
         <script src="<?php echo $librerias->getLibreria('lib_jquery_ui'); ?>" type="text/javascript"></script>
         <script type="text/javascript">
             $(function() {
                 $( "#roles-tabs" ).tabs();
-                
-                $( ".radio" ).buttonset();                
+
+                $( ".radio" ).buttonset();
             });
         </script>
     </head>
@@ -107,7 +108,7 @@ $nombreModulo = 'Privilegios';
                 <?php
                     $consulta = "SELECT vch_rolNombre FROM rol WHERE pk_Rol = $id; ";
                     $resultado = mysql_query($consulta) or die('Error al ejecutar la consulta');
-                    $datos = mysql_fetch_array($resultado);                     
+                    $datos = mysql_fetch_array($resultado);
                 ?>
                 <span class="titulo titulo-h1">Privilegios: <?php echo $datos['vch_rolNombre']; ?></span>
                 <div class="div-panel" style="width: 400px; margin: 0px auto;">
@@ -119,10 +120,10 @@ $nombreModulo = 'Privilegios';
                             </tr>
                      <?php
                         $consulta = "SELECT int_asigPrivAsignado, pk_Privilegio, vch_privNombre, bol_privAdministrador, bol_privCliente " .
-                                   "FROM asignado, privilegio " . 
+                                   "FROM asignado, privilegio " .
                                     "WHERE fk_Asignado_Rol = $id AND pk_Privilegio = fk_Asignado_Privilegio;";
                         $resultado = mysql_query($consulta) or die('Error al ejecutar la consulta');
-                     
+
                         while($datos = mysql_fetch_array($resultado)) {
                             $nombrePrivilegio = $datos['vch_privNombre'];
                             $idPrivilegio = $datos['pk_Privilegio'];
@@ -138,7 +139,7 @@ $nombreModulo = 'Privilegios';
                             if($administrador == 1) {
                                 $checked = "";
                                 if($privilegioAsignado == 1) {
-                                   $checked = "checked='checked'"; 
+                                   $checked = "checked='checked'";
                                 }
                                 echo "<input type='radio' id='radio-admin-$idPrivilegio' name='radio-$idPrivilegio' $checked value='1' />";
                                 echo "<label for='radio-admin-$idPrivilegio'>Administrador</label>";
@@ -150,7 +151,7 @@ $nombreModulo = 'Privilegios';
                             if($cliente == 1) {
                                 $checked = "";
                                 if($privilegioAsignado == 2) {
-                                   $checked = "checked='checked'"; 
+                                   $checked = "checked='checked'";
                                 }
                                 echo "<input type='radio' id='radio-client-$idPrivilegio' name='radio-$idPrivilegio' $checked value='2' />";
                                 echo "<label for='radio-client-$idPrivilegio'>Cliente</label>";
@@ -159,7 +160,7 @@ $nombreModulo = 'Privilegios';
                                 echo "<input type='radio' id='radio-client-$idPrivilegio' name='radio-$idPrivilegio' $checked value='2' disabled='disabled' />";
                                 echo "<label for='radio-client-$idPrivilegio'>Cliente</label>";
                             }
-                            
+
                             if($privilegioAsignado == 0) {
                                 echo "<input type='radio' id='radio-ninguno-$idPrivilegio' name='radio-$idPrivilegio' checked='checked' value='0' />";
                                 echo "<label for='radio-ninguno-$idPrivilegio'>Ninguno</label>";

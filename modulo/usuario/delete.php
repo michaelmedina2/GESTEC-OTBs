@@ -12,7 +12,7 @@
 	} else {
 		$accion = 'I';
 	}
-	$sqlRol = $db->executeQuerySQL("UPDATE rol SET vch_rolestado = '$accion' WHERE pk_rol = '$id';");
+	$sqlRol = $db->executeQuerySQL("UPDATE usuario SET vch_usuaestado = '$accion' WHERE pk_usuario = '$id';");
 	header("location: index.php");
 
 ?>
