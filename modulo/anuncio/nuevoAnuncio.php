@@ -2,10 +2,19 @@
     session_start();
 
     $path = "../../";
+<<<<<<< HEAD
      include_once("../../class/library.class.php");
     include_once("../../class/setting.class.php");
     $lib = new Library($path);
     $setting = new Setting();
+=======
+    include_once("../../class/library.class.php");
+	include_once("../../class/setting.class.php");
+
+    $lib = new Library($path);
+	$setting = new Setting();
+
+>>>>>>> origin/master
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -45,8 +54,8 @@
     <script src="<?php echo $lib->getJS("lib_dataTables2"); ?>" type="text/javascript"></script>
     <script src="<?php echo $lib->getJS("lib_dataTables3"); ?>" type="text/javascript"></script>
     <script src="<?php echo $lib->getJS("lib_jscript"); ?>" type="text/javascript"></script>
-
 </head>
+
 <body>
 
 <header id="header">
@@ -61,7 +70,11 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
+<<<<<<< HEAD
         $nameRol  = $sesion->obtener("nombreRol");
+=======
+		$nameRol  = $sesion->obtener("nombreRol");	
+>>>>>>> origin/master
         include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -97,8 +110,13 @@
                 </div>
 				<input class="form-control" type="hidden" id="dtp_input1" name="dtp_input1" value="" /><br/>
 			</div>
+<<<<<<< HEAD
         </div>
 
+=======
+        </div>	
+		
+>>>>>>> origin/master
 		<div class="form-group">
 			<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                     <input class="form-control" type="text" value="" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required readonly>
@@ -107,7 +125,11 @@
             </div>
 				<input class="form-control" type="hidden" id="dtp_input2" name="dtp_input2" value="" /><br/>
 		</div>
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> origin/master
 					<div class="form-group">
 						<select name="estadoAnuncio" class="form-control" required>
 							<option value="">Select...</option>
@@ -135,8 +157,13 @@
 </footer><!--/#footer-->
 
 
+<<<<<<< HEAD
 <script type="text/javascript" src="../../js/bootstrap-datetimepicker.js" ></script>
 <script type="text/javascript" src="../../js/locales/bootstrap-datetimepicker.es.js" ></script>
+=======
+<script type="text/javascript" src="../../js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../js/locales/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
+>>>>>>> origin/master
 <script type="text/javascript">
 	$('.form_date').datetimepicker({
         language:  'es',

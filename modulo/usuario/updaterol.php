@@ -69,6 +69,7 @@
 <div class="container-fluid contenedor">
     <div class="row">
         <div class="col-xs-8 contenido" id="central">
+<<<<<<< HEAD
 			
             <center>
 			<div class="col-md-8 col-md-offset-2">
@@ -165,6 +166,42 @@
 			</center>
 
 
+=======
+
+            <center>
+			<div id="contenidoCRUD">
+			<?php
+                include_once("../../class/dbmanager.class.php");
+                $db = ManagerBDPostgres::getInstanceBDPostgres();
+
+                $id = $_GET['id'];
+
+                $sqlRol = $db->executeQuerySQL("select * from rol where pk_rol='$id'");
+                $row = $db->query_Fetch_Array($sqlRol);
+            ?>
+
+            <form accept-charset="UTF-8" role="form" method="POST" action="update.php">
+                <fieldset>
+                    <div class="form-group">
+                        <h2>Actualizar Rol</h2>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="nombre rol" name="nombre" id="nombre" type="text" value="<?php echo $row[vch_rolnombre]; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="estado rol" name="estado" id="estado" type="text" value="<?php echo $row[vch_rolestado]; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" value="<?php echo $row[pk_rol]; ?>" id="idrol" name="idrol" />
+                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Aceptar">
+                        <a class="btn btn-lg btn-primary btn-block" href="index.php">Volver</a>
+                    </div>
+                </fieldset>
+            </form>
+            </div>
+			</center>
+
+>>>>>>> origin/master
         </div>
         <div class="col-xs-4 sidebar" id="noticia">
               <?php include_once("../../system/side.php"); ?>

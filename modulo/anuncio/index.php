@@ -2,10 +2,19 @@
 	session_start();
 
 	$path = "../../";
+<<<<<<< HEAD
     include_once("../../class/library.class.php");
 	include_once("../../class/setting.class.php");
     $lib = new Library($path);
     $setting = new Setting();
+=======
+	include_once("../../class/library.class.php");
+	include_once("../../class/setting.class.php");
+		
+	$lib = new Library($path);
+	$setting = new Setting();
+	
+>>>>>>> origin/master
 	include_once("../../class/sesion.class.php");
 
 	$sesion = Sesion::getInstance();
@@ -13,7 +22,10 @@
 	if($sesion->iniciado() == 0) {
 		header('location: ' . $path . 'index.php');
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	$idUsuario = $sesion->obtener('idUsuario');
 	$nombreModulo = 'Anuncio';
 
@@ -59,8 +71,13 @@
      <?php
         $menuItem = 'Anuncio';
         $idRol    = $sesion->obtener('idRol');
+<<<<<<< HEAD
 		$nameUser = $sesion->obtener("nombreUsuario");
         $nameRol  = $sesion->obtener("nombreRol");
+=======
+		$nameUser = $sesion->obtener("nombreUsuario"); 
+        $nameRol  = $sesion->obtener("nombreRol");		
+>>>>>>> origin/master
 		include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -69,12 +86,21 @@
 <div class="container-fluid contenedor">
 	<div class="row">
     	<div class="col-xs-8 contenido" id="central">
+<<<<<<< HEAD
 
             <a href="nuevoAnuncio.php" class="btn btn-primary" id="btnNew">A&ntildeadir Anuncio</a>
             <center>
 
             <caption> <h1>Gesti&oacute;n de Anuncios</h1></caption>
             <table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+=======
+    		
+            <a href="nuevoAnuncio.php" class="btn btn-primary" id="btnNew">A&ntildeadir Anuncio</a>
+            <center>
+            
+            <caption> <h1>Gesti&oacute;n de Anuncios</h1></caption>
+            <table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">	       
+>>>>>>> origin/master
                 <thead>
                     <tr>
                         <th>Titulo Anuncio</th>
@@ -85,6 +111,7 @@
 						<th>Descripcion</th>
                     </tr>
                 </thead>
+<<<<<<< HEAD
                 <tbody>
                     <?php
                         $sqlAnuncio = $db->executeQuerySQL("select * from anuncio");
@@ -92,6 +119,15 @@
                         while($row=$db->query_Fetch_Array($sqlAnuncio))
                         {
                     ?>
+=======
+                <tbody> 
+                    <?php
+                        $sqlAnuncio = $db->executeQuerySQL("select * from anuncio");
+                        
+                        while($row=$db->query_Fetch_Array($sqlAnuncio))
+                        {
+                    ?>      	
+>>>>>>> origin/master
                     <tr>
                         <td><?php echo $row[vch_anuntitulo]; ?></td>
 						<td><?php echo $row[dtt_anunfechainicio]; ?></td>
@@ -101,20 +137,33 @@
                             <div class="btn-group btn-group-xs">
                               <a href="actualizarAnuncio.php?id=<?php echo $row[pk_anuncio]; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
                               <a href="activate.php?id=<?php echo $row[pk_anuncio]; ?>&est=<?php $accion = '';
+<<<<<<< HEAD
 							  if ($row['vch_anunestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>"
+=======
+							  if ($row['vch_anunestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>" 
+>>>>>>> origin/master
 							  class="btn btn-info" id="btnUpdate"><?php echo $accion; ?></a>
                             </div>
                             </center></td>
 						<td><?php echo $row[vch_anuncontenido]; ?></td>
+<<<<<<< HEAD
                     </tr>
+=======
+                    </tr>                 
+>>>>>>> origin/master
                     <?php
                         }
                     ?>
                 </tbody>
             </table>
             </center>
+<<<<<<< HEAD
 
 
+=======
+            
+            
+>>>>>>> origin/master
         </div>
         <div class="col-xs-4 sidebar" id="noticia">
       		<?php include_once("../../system/side.php"); ?>

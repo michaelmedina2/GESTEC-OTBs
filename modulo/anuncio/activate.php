@@ -1,6 +1,5 @@
 <?php
 	include "../../class/dbmanager.class.php";
-	
 	$db = ManagerBDPostgres::getInstanceBDPostgres();
 	
 	$actividad = $_GET["id"];

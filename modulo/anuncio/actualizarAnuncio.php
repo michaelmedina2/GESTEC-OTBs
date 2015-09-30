@@ -3,9 +3,17 @@
 
     $path = "../../";
     include_once("../../class/library.class.php");
+<<<<<<< HEAD
     include_once("../../class/setting.class.php");
     $lib = new Library($path);
     $setting = new Setting();
+=======
+	include_once("../../class/setting.class.php");
+
+    $lib = new Library($path);
+	$setting = new Setting();
+
+>>>>>>> origin/master
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -13,7 +21,6 @@
     if($sesion->iniciado() == 0) {
         header('location: ' . $path . 'index.php');
     }
-
     $idUsuario = $sesion->obtener('idUsuario');
     $nombreModulo = 'Anuncio';
 
@@ -45,8 +52,8 @@
     <script src="<?php echo $lib->getJS("lib_dataTables2"); ?>" type="text/javascript"></script>
     <script src="<?php echo $lib->getJS("lib_dataTables3"); ?>" type="text/javascript"></script>
     <script src="<?php echo $lib->getJS("lib_jscript"); ?>" type="text/javascript"></script>
-
 </head>
+
 <body>
 
 <header id="header">
@@ -61,10 +68,16 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
+<<<<<<< HEAD
         $nameRol  = $sesion->obtener("nombreRol");
         include_once("../../system/menu.php");
 
 			#==================================================
+=======
+		$nameRol  = $sesion->obtener("nombreRol");	
+        include_once("../../system/menu.php");
+
+>>>>>>> origin/master
 	include_once("../../class/dbmanager.class.php");
                 $db = ManagerBDPostgres::getInstanceBDPostgres();
 
@@ -107,8 +120,13 @@
 					</div>
 					<input class="form-control" type="hidden" id="dtp_input1" name="dtp_input1" value="<?php echo $row[dtt_anunfechainicio]; ?>" /><br/>
 				</div>
+<<<<<<< HEAD
 			</div>
 
+=======
+			</div>	
+			
+>>>>>>> origin/master
 			<div class="form-group">
 				<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
 						<input class="form-control" type="text" value="<?php echo $row[dtt_anunfechafin]; ?>" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required readonly>
@@ -117,9 +135,15 @@
 				</div>
 					<input class="form-control" type="hidden" id="dtp_input2" name="dtp_input2" value="<?php echo $row[dtt_anunfechafin]; ?>" /><br/>
 			</div>
+<<<<<<< HEAD
 
 
 
+=======
+			
+			
+			
+>>>>>>> origin/master
 					<div class="form-group">
 						<select name="estadoAnuncio" class="form-control" required>
 						<?php $vch_anunestado = '';

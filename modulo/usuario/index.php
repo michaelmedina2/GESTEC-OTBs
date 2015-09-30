@@ -100,7 +100,11 @@
                         <td><?php echo $row[vch_usuanombre]." ".$row[vch_usuaapp]." ".$row[vch_usuaapm]; ?></td>
                         <td>
                         <center>
+<<<<<<< HEAD
 						<?php 							
+=======
+						<?php 
+>>>>>>> origin/master
 							if($row[vch_usuasexo]=="F")
 							{
 								echo '<img src="../../img/femenino.png" width="20px" class="img-rounded">';

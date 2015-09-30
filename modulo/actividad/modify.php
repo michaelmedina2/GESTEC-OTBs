@@ -3,9 +3,21 @@
 
     $path = "../../";
     include_once("../../class/library.class.php");
+<<<<<<< HEAD
     include_once("../../class/setting.class.php");
     $lib = new Library($path);
     $setting = new Setting();
+=======
+<<<<<<< HEAD
+    include_once("../../class/setting.class.php");
+    $lib = new Library($path);
+    $setting = new Setting();
+=======
+
+    $lib = new Library($path);
+
+>>>>>>> origin/master
+>>>>>>> origin/master
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -27,7 +39,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<<<<<<< HEAD
     <title><?php echo $setting->getTitle(); ?></title>
+=======
+<<<<<<< HEAD
+    <title><?php echo $setting->getTitle(); ?></title>
+=======
+    <title>.- GESTEC OTB -.</title>
+>>>>>>> origin/master
+>>>>>>> origin/master
 
     <!-- Bootstrap -->
     <link rel="icon" href="../../gotb2.png">
@@ -60,7 +80,14 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
+<<<<<<< HEAD
         $nameRol  = $sesion->obtener("nombreRol");
+=======
+<<<<<<< HEAD
+        $nameRol  = $sesion->obtener("nombreRol");
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
         include_once("../../system/menu.php");
     ?>
 </nav><!--/nav-->
@@ -69,16 +96,36 @@
 <div class="container-fluid contenedor">
     <div class="row">
         <div class="col-xs-8 contenido" id="central">
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+			
+>>>>>>> origin/master
+>>>>>>> origin/master
             <center>
 			<div id="contenidoCRUD">
 
             <?php
                 include_once("../../class/dbmanager.class.php");
                 $db = ManagerBDPostgres::getInstanceBDPostgres();
+<<<<<<< HEAD
 
                 $id = $_GET['id'];
 
+=======
+<<<<<<< HEAD
+
+                $id = $_GET['id'];
+
+=======
+                
+                $id = $_GET['id'];
+                
+>>>>>>> origin/master
+>>>>>>> origin/master
                 $sqlActividad = $db->executeQuerySQL("SELECT * FROM conceptomovimiento WHERE pk_concepto=$id;");
                 $row = $db->query_Fetch_Array($sqlActividad);
             ?>

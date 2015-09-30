@@ -71,7 +71,11 @@
     	<div class="col-xs-8 contenido" id="central">
 
 
+<<<<<<< HEAD
             <a href="new.php" class="btn btn-primary" id="btnNew">Nueva</a>
+=======
+            <a href="new.php" class="btn btn-primary" id="btnNew">A&ntildeadir Actividad</a>
+>>>>>>> origin/master
             <center>
 
             <caption> <h1>Gesti&oacute;n de Actividades</h1></caption>

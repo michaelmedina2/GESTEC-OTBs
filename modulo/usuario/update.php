@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 	$rutaRaiz = '../../';
 	include_once($rutaRaiz . 'class/library.class.php');
 
@@ -41,5 +42,15 @@
 			
 	$sql = $db->executeQuerySQL("UPDATE usuario SET pk_rol = '$pk_rol', vch_usuatipousuario = '$tipoUser', vch_usuausername = '$username', vch_usuanombre = '$nombre', vch_usuaapp = '$app', vch_usuaapm = '$apm', vch_usuasexo = '$sexo', dat_usuafechanacimiento = '$fnaci', vch_usuaci = '$ci', vch_usuatelefono = '$telefono', vch_usuadireccion = '$direccion', vch_usuafoto = '$nombreFoto', vch_usuaestado = '$estado' WHERE pk_usuario = '$id'");
 	
+=======
+	include_once("../../class/dbmanager.class.php");
+	$db = ManagerBDPostgres::getInstanceBDPostgres();
+	
+	$id     = $_POST['idrol'];
+	$nombre = $_POST['nombre'];
+	$estado = $_POST['estado'];
+	
+	$sqlRol = $db->executeQuerySQL("UPDATE rol SET vch_rolnombre = '$nombre', vch_rolestado = '$estado' WHERE pk_rol = '$id'");
+>>>>>>> origin/master
 	header("location: index.php");
 ?>
