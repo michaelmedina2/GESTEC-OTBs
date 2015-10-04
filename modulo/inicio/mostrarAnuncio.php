@@ -1,9 +1,11 @@
 <?php
 	session_start();
 	
+	$id = $_GET['id'];
 	$path = "../../";
 	include_once($path."class/library.class.php");
 	include_once($path."class/setting.class.php");
+	
 		
 	$lib = new Library($path);
 	$setting = new Setting();
@@ -16,8 +18,7 @@
 		header('location: ' . $path . 'index.php');
 	}
 	$idUsuario = $sesion->obtener('idUsuario');
-	$nombreModulo = 'Anuncio';
-	
+		
 	$dirModulos = $lib->getDirectory('dir_module');
 	$dirUpload  = $lib->getDirectory('dir_upload');	
 ?>
@@ -57,8 +58,7 @@
 
 
 <nav class="navbar navbar-inverse">
-     <?php
-        $menuItem = 'Anuncio';        
+     <?php      
         $idRol    = $sesion->obtener('idRol');
 		$nameUser = $sesion->obtener("nombreUsuario"); 
         $nameRol  = $sesion->obtener("nombreRol");		
@@ -69,52 +69,23 @@
 
 <div class="container-fluid contenedor">
 	<div class="row">
+	<?php
+		$sqlAnuncio = $db->executeQuerySQL("select * from anuncio where pk_anuncio=$id");
+		
+		$row=$db->query_Fetch_Array($sqlAnuncio)
+	?> 
     	<div class="col-xs-8 contenido" id="central">
     		
-            <a href="nuevoAnuncio.php" class="btn btn-primary" id="btnNew">A&ntildeadir Anuncio</a>
-            <center>
-            
-            <caption> <h1>Gesti&oacute;n de Anuncios</h1></caption>
-            <table id="gridx" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">	       
-                <thead>
-                    <tr>
-                        <th>Titulo Anuncio</th>
-                        <th>Fecha Inicio</th>
-						<th>Fecha Fin</th>
-						<th>Estado</th>
-						<th>Control</th>
-						<th>Descripcion</th>
-                    </tr>
-                </thead>
-                <tbody> 
-                    <?php
-                        $sqlAnuncio = $db->executeQuerySQL("select * from anuncio");
-                        
-                        while($row=$db->query_Fetch_Array($sqlAnuncio))
-                        {
-                    ?>      	
-                    <tr>
-                        <td><?php echo $row[vch_anuntitulo]; ?></td>
-						<td><?php echo $row[dtt_anunfechainicio]; ?></td>
-						<td><?php echo $row[dtt_anunfechafin]; ?></td>
-                        <td><center><?php if ($row[vch_anunestado] == 'A') { echo "Activo"; } if ($row[vch_anunestado] == 'I') { echo "Inactivo"; } ?></center></td>
-                        <td><center>
-                            <div class="btn-group btn-group-xs">
-                              <a href="actualizarAnuncio.php?id=<?php echo $row[pk_anuncio]; ?>" class="btn btn-warning" id="btnUpdate">Actualizar</a>
-                              <a href="activate.php?id=<?php echo $row[pk_anuncio]; ?>&est=<?php $accion = '';
-							  if ($row['vch_anunestado'] == 'A') { $accion = 'Baja'; echo '0'; } else { $accion = 'Alta'; echo '1'; } ?>" 
-							  class="btn btn-info" id="btnUpdate"><?php echo $accion; ?></a>
-                            </div>
-                            </center></td>
-						<td><?php echo $row[vch_anuncontenido]; ?></td>
-                    </tr>                 
-                    <?php
-                        }
-                    ?>
-                </tbody>
-            </table>
-            </center>
-            
+        <div class="alert alert-info" role="alert">
+		<h3><strong><?php echo $row[vch_anuntitulo]; ?></strong></h3>
+		</div>
+        <div class="panel panel-primary">
+				<div class="panel-body">
+				<strong>Detalle: </strong><?php echo $row[vch_anuncontenido]; ?> </br></br>
+				<strong>Fecha de publicacion: </strong><?php echo $row[dtt_anunfechainicio]; ?> </br>
+				<strong>Fecha de finalzacion: </strong><?php echo $row[dtt_anunfechafin]; ?>
+				</div>
+		</div>    
             
         </div>
         <div class="col-xs-4 sidebar" id="noticia">

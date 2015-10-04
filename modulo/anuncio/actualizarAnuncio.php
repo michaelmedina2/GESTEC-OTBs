@@ -3,17 +3,11 @@
 
     $path = "../../";
     include_once("../../class/library.class.php");
-<<<<<<< HEAD
-    include_once("../../class/setting.class.php");
-    $lib = new Library($path);
-    $setting = new Setting();
-=======
 	include_once("../../class/setting.class.php");
 
     $lib = new Library($path);
 	$setting = new Setting();
 
->>>>>>> origin/master
     include_once("../../class/sesion.class.php");
 
     $sesion = Sesion::getInstance();
@@ -68,21 +62,14 @@
 
         $idRol    = $sesion->obtener('idRol');
         $nameUser = $sesion->obtener("nombreUsuario");
-<<<<<<< HEAD
-        $nameRol  = $sesion->obtener("nombreRol");
-        include_once("../../system/menu.php");
-
-			#==================================================
-=======
 		$nameRol  = $sesion->obtener("nombreRol");	
         include_once("../../system/menu.php");
 
->>>>>>> origin/master
 	include_once("../../class/dbmanager.class.php");
                 $db = ManagerBDPostgres::getInstanceBDPostgres();
-
+                
                 $id = $_GET['id'];
-
+                
                 $sqlAnuncio = $db->executeQuerySQL("select * from anuncio where pk_anuncio='$id'");
                 $row = $db->query_Fetch_Array($sqlAnuncio);
     ?>
@@ -92,7 +79,7 @@
 <div class="container-fluid contenedor">
     <div class="row">
         <div class="col-xs-8 contenido" id="central">
-
+			
             <center>
 			<div id="contenidoCRUD">
 			<form accept-charset="UTF-8" role="form" method="POST" action="registrarAnuncioActualizado.php">
@@ -120,13 +107,8 @@
 					</div>
 					<input class="form-control" type="hidden" id="dtp_input1" name="dtp_input1" value="<?php echo $row[dtt_anunfechainicio]; ?>" /><br/>
 				</div>
-<<<<<<< HEAD
-			</div>
-
-=======
 			</div>	
 			
->>>>>>> origin/master
 			<div class="form-group">
 				<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
 						<input class="form-control" type="text" value="<?php echo $row[dtt_anunfechafin]; ?>" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required readonly>
@@ -135,20 +117,14 @@
 				</div>
 					<input class="form-control" type="hidden" id="dtp_input2" name="dtp_input2" value="<?php echo $row[dtt_anunfechafin]; ?>" /><br/>
 			</div>
-<<<<<<< HEAD
-
-
-
-=======
 			
 			
 			
->>>>>>> origin/master
 					<div class="form-group">
 						<select name="estadoAnuncio" class="form-control" required>
 						<?php $vch_anunestado = '';
-						if ($row[vch_anunestado] == 'A') { $anunestado = "Activo"; }
-						if ($row[vch_anunestado] == 'I') { $anunestado = "Inactivo"; }
+						if ($row[vch_anunestado] == 'A') { $anunestado = "Activo"; } 
+						if ($row[vch_anunestado] == 'I') { $anunestado = "Inactivo"; } 
 						?>
 							<option value="<?php echo substr($anunestado,0,1);?>"><?php echo $anunestado; ?></option>
 							<option value="A">Activo</option>

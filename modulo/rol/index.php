@@ -2,8 +2,8 @@
 	session_start();
 
 	$path = "../../";
-	include_once("../../class/library.class.php");
-    include_once("../../class/setting.class.php");
+	include_once($path."class/library.class.php");
+    include_once($path."class/setting.class.php");
 	$lib = new Library($path);
     $setting = new Setting();
 	include_once("../../class/sesion.class.php");
@@ -69,13 +69,7 @@
 <div class="container-fluid contenedor">
 	<div class="row">
     	<div class="col-xs-8 contenido" id="central">
-
-
-<<<<<<< HEAD
-            <a href="newrol.php" class="btn btn-primary" id="btnNew">Nuevo</a>
-=======
             <a href="newrol.php" class="btn btn-primary" id="btnNew">A&ntildeadir Rol</a>
->>>>>>> origin/master
             <center>
 
             <caption> <h1>Gesti&oacute;n de Roles</h1></caption>
