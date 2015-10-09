@@ -65,6 +65,7 @@
         $nameUser = $sesion->obtener("nombreUsuario");
 		$nameRol  = $sesion->obtener("nombreRol");	
         include_once("../../system/menu.php");
+
     ?>
 </nav><!--/nav-->
 
@@ -151,8 +152,6 @@
 		forceParse: 0
     });
 </script>
-
-
 
 </body>
 </html>

@@ -88,7 +88,8 @@
                 </thead>
                 <tbody> 
                     <?php
-                        $sqlAnuncio = $db->executeQuerySQL("select * from anuncio");
+                        $sql = $db->executeQuerySQL("UPDATE anuncio SET vch_anunestado = 'I' WHERE dtt_anunfechafin < current_date;");
+						$sqlAnuncio = $db->executeQuerySQL("select * from anuncio");
                         
                         while($row=$db->query_Fetch_Array($sqlAnuncio))
                         {

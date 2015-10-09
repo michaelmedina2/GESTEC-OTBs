@@ -13,11 +13,13 @@
 
 		while($row=$db->query_Fetch_Array($sqlRol))
 		{
+		if ($row[dtt_anunfechainicio] == date("Y-m-d"))
+		{
 	?>
         <div class="item">
-			<div class="panel panel-primary">
+			<div class="panel panel-success">
 				<div class="panel-heading">
-				<h3 class="panel-title">Fecha de Publicacion: <?php echo $row[dtt_anunfechainicio]; ?></td></h3>
+				<h3 class="panel-title">Nueva Publicacion!!<br> Publicado: <?php echo $row[dtt_anunfechainicio]; ?> </td></h3>
 				</div>
 				<div class="panel-body">
 				<tr><a href="../../modulo/inicio/mostrarAnuncio.php?id=<?php echo $row[pk_anuncio]; ?>"><?php echo $row[vch_anuntitulo]; ?></a><tr>
@@ -26,6 +28,39 @@
 		</div>
 	<?php
 		$cont=$cont+1;
+		}
+		else if ($row[dtt_anunfechafin] == date("Y-m-d"))
+		{
+	?>
+        <div class="item">
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+				<h3 class="panel-title">Publicacion por terminar!!<br> Publicado: <?php echo $row[dtt_anunfechainicio]; ?> </td></h3>
+				</div>
+				<div class="panel-body">
+				<tr><a href="../../modulo/inicio/mostrarAnuncio.php?id=<?php echo $row[pk_anuncio]; ?>"><?php echo $row[vch_anuntitulo]; ?></a><tr>
+				</div>
+			</div>
+		</div>
+	<?php
+		$cont=$cont+1;
+		}
+		if ($row[dtt_anunfechainicio] < date("Y-m-d") && $row[dtt_anunfechafin] > date("Y-m-d"))
+		{
+	?>
+        <div class="item">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+				<h3 class="panel-title">Publicado: <?php echo $row[dtt_anunfechainicio]; ?> </td></h3>
+				</div>
+				<div class="panel-body">
+				<tr><a href="../../modulo/inicio/mostrarAnuncio.php?id=<?php echo $row[pk_anuncio]; ?>"><?php echo $row[vch_anuntitulo]; ?></a><tr>
+				</div>
+			</div>
+		</div>
+	<?php
+		$cont=$cont+1;
+		}
 		}
 	?>
 		</div>
