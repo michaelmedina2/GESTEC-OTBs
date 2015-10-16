@@ -72,6 +72,13 @@
                 
                 $sqlAnuncio = $db->executeQuerySQL("select * from anuncio where pk_anuncio='$id'");
                 $row = $db->query_Fetch_Array($sqlAnuncio);
+				
+				$meses = array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio', 'Agosto','Septiembre','Octubre','Noviembre','Diciembre');
+				$orderFechaIni = explode('-', $row[dtt_anunfechainicio]);
+				$orderFechaFin = explode('-', $row[dtt_anunfechafin]);
+				
+				$fechaInicioRec = $orderFechaIni[2].' '.$meses[$orderFechaIni[1]-1].' '.$orderFechaIni[0];
+				$fechaFinRec = $orderFechaFin[2].' '.$meses[$orderFechaFin[1]-1].' '.$orderFechaFin[0];
     ?>
 </nav><!--/nav-->
 
@@ -101,7 +108,7 @@
             <div class="form-group">
 				<div class="form-group">
 					<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
-						<input class="form-control" type="text" value="<?php echo $row[dtt_anunfechainicio]; ?>" placeholder="Fecha Inicio"  name="fechaInicio" id="fechaInicio" required readonly>
+						<input class="form-control" type="text" value="<?php echo $fechaInicioRec; ?>" placeholder="Fecha Inicio"  name="fechaInicio" id="fechaInicio" required readonly>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 					</div>
@@ -111,7 +118,7 @@
 			
 			<div class="form-group">
 				<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-						<input class="form-control" type="text" value="<?php echo $row[dtt_anunfechafin]; ?>" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required readonly>
+						<input class="form-control" type="text" value="<?php echo $fechaFinRec; ?>" placeholder="Fecha Fin"  name="fechaFin" id="fechaFin" required readonly>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				</div>

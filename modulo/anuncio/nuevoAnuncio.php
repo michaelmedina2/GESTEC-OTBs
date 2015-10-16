@@ -65,6 +65,9 @@
         $nameUser = $sesion->obtener("nombreUsuario");
 		$nameRol  = $sesion->obtener("nombreRol");	
         include_once("../../system/menu.php");
+		
+		$meses = array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio', 'Agosto','Septiembre','Octubre','Noviembre','Diciembre');
+		$esteDia = date('d').' '.$meses [date('m')-1].' '.date('Y');
 
     ?>
 </nav><!--/nav-->
@@ -94,11 +97,11 @@
         <div class="form-group">
             <div class="form-group">
 				<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
-                    <input class="form-control" type="text" value="" placeholder="Fecha Inicio"  name="fechaInicio" id="fechaInicio" required readonly>
+                    <input class="form-control" type="text" value="<?php echo $esteDia; ?>" placeholder="Fecha Inicio"  name="fechaInicio" id="fechaInicio" required readonly>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
-				<input class="form-control" type="hidden" id="dtp_input1" name="dtp_input1" value="" /><br/>
+				<input class="form-control" type="hidden" id="dtp_input1" name="dtp_input1" value="<?php echo date('Y-m-d') ?>" /><br/>
 			</div>
         </div>	
 		
@@ -113,7 +116,6 @@
 		
 					<div class="form-group">
 						<select name="estadoAnuncio" class="form-control" required>
-							<option value="">Select...</option>
 							<option value="A">Activo</option>
 							<option value="I">Inactivo</option>
 						</select>
